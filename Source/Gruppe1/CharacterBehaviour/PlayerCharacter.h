@@ -42,5 +42,5 @@ public:
 		void StopJump();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Jumping")
-		bool isJumping = false;
+	bool isJumping;
 };

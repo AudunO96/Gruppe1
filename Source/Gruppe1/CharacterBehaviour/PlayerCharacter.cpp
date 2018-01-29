@@ -65,14 +65,19 @@ void APlayerCharacter::Interact()
 
 }
 
+void ChangeBool(bool bVal)
+{
+	bVal = !bVal;
+}
+
 void APlayerCharacter::StartJump()
 {
 	bPressedJump = true;
-	isJumping = bPressedJump;
+	isJumping = !isJumping;
 }
 
 void APlayerCharacter::StopJump()
 {
 	bPressedJump = false;
-	isJumping = bPressedJump;
+	isJumping = !isJumping;
 }
