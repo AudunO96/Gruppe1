@@ -43,4 +43,14 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Jumping")
 	bool isJumping;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Upgrades")
+		bool canJumpHigh;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Upgrades")
+		bool canGlide;
+	/*
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Upgrades")
+	TArray<bool> PassengerSeats;
+	*/
 };
