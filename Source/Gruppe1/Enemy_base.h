@@ -19,10 +19,13 @@ public:
 	void recieveDamage(float incomingDamage);
 
 	UFUNCTION(BlueprintCallable)
-	float GetHealth();
+	float getHealth();
 
 	UFUNCTION(BlueprintCallable)
 	float getMaxHealth();
+
+	UFUNCTION(BlueprintCallable)
+	void setHealth();
 
 protected:
 	// Called when the game starts or when spawned
@@ -32,6 +35,7 @@ protected:
 	UPROPERTY(editAnywhere)
 	float maxHealth;
 
+	UPROPERTY(VisibleAnywhere)
 	float health;
 
 public:	
