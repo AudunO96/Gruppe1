@@ -8,8 +8,6 @@ AEnemy_base::AEnemy_base()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
-	health = maxHealth;
 }
 
 void AEnemy_base::recieveDamage(float incomingDamage)
@@ -19,7 +17,7 @@ void AEnemy_base::recieveDamage(float incomingDamage)
 	health = FMath::Clamp(health, 0.0f, maxHealth);
 }
 
-float AEnemy_base::GetHealth()
+float AEnemy_base::getHealth()
 {
 	return health;
 }
@@ -27,6 +25,11 @@ float AEnemy_base::GetHealth()
 float AEnemy_base::getMaxHealth()
 {
 	return maxHealth;
+}
+
+void AEnemy_base::setHealth()
+{
+	health = maxHealth;
 }
 
 // Called when the game starts or when spawned
