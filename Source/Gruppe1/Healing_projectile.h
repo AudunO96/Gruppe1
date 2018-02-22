@@ -6,6 +6,7 @@
 #include "Healing_base.h"
 #include "Healing_projectile.generated.h"
 
+
 /**
  * 
  */
@@ -17,11 +18,16 @@ class GRUPPE1_API AHealing_projectile : public AHealing_base
 public:
 	void setTrajectory(FVector trajectory);
 
+
 protected:
 	float travelLength;
+	float lengthTraveled{0};
 
 	UPROPERTY(EditAnywhere)
 	float speed;
+
+	UPROPERTY(EditAnywhere)
+	float groundOffset;
 
 
 public:

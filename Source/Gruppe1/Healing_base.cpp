@@ -1,7 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Healing_base.h"
-#include "Enemy_base.h"
 
 
 // Sets default values
@@ -23,12 +22,13 @@ void AHealing_base::BeginPlay()
 void AHealing_base::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	lifeTime += DeltaTime;
 
+	if (lifeTimeMax <= lifeTime)
+		delete this;
 }
 
-void AHealing_base::deliverHealing(AActor* target, float amount, float deltaTime)
+float AHealing_base::deliverHealing(float deltaTime)
 {
-	AEnemy_base* enemyRef = Cast<AEnemy_base>(target);
-
-	enemyRef->recieveDamage(amount * deltaTime);
+	return healStrength * deltaTime;
 }
