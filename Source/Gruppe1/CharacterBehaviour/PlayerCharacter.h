@@ -23,8 +23,25 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	// Returns CursorToWorld subobject
+	FORCEINLINE class UDecalComponent* GetCursorToWorld() { return CursorToWorld; }
+
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+	/** Returns TopDownCameraComponent subobject **/
+	FORCEINLINE class UCameraComponent* GetTopDownCameraComponent() const { return TopDownCameraComponent; }
+	/** Returns CameraBoom subobject **/
+	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Jumping")
+	bool isJumping;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Upgrades")
+		bool canJumpHigh;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Upgrades")
+		bool canGlide;
 
 	UFUNCTION()
 		void MoveX(float Value);
@@ -40,17 +57,24 @@ public:
 
 	UFUNCTION()
 		void StopJump();
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Jumping")
-	bool isJumping;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Upgrades")
-		bool canJumpHigh;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Upgrades")
-		bool canGlide;
 	/*
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Upgrades")
-	TArray<bool> PassengerSeats;
+	TArray<bool> Upgrades;
 	*/
+
+private: 
+	
+	/** Top down camera */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
+		class UCameraComponent* TopDownCameraComponent;
+
+	/** Camera boom positioning the camera above the character */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
+		class USpringArmComponent* CameraBoom;
+
+	/** A decal that projects to the cursor location. */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
+		class UDecalComponent* CursorToWorld;
+
+	FVector ProjectileTrajectory;
 };
