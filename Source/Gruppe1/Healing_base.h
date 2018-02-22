@@ -15,17 +15,26 @@ public:
 	// Sets default values for this actor's properties
 	AHealing_base();
 
+	UFUNCTION(BlueprintCallable)
+	float deliverHealing(float deltaTime = 1.0f);
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	UFUNCTION(BlueprintCallable)
-	void deliverHealing(AActor* target, float amount, float deltaTime = 1.0f);
+	
+
+	UPROPERTY(EditAnywhere, Category = "Healing Properties")
+	float healStrength;
 
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	
+private:
+	float lifeTime{0};
+
+	UPROPERTY(EditAnywhere, Category = "Healing Properties")
+	float lifeTimeMax;
 	
 };
