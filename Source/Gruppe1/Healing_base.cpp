@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Healing_base.h"
+#include "GameFramework/ProjectileMovementComponent.h"
 
 
 // Sets default values
@@ -24,8 +25,8 @@ void AHealing_base::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	lifeTime += DeltaTime;
 
-	if (lifeTimeMax <= lifeTime)
-		delete this;
+	//if (lifeTimeMax <= lifeTime)
+		//Destroy();
 }
 
 float AHealing_base::deliverHealing(float deltaTime)

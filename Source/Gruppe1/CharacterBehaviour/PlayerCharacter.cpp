@@ -62,6 +62,27 @@ void APlayerCharacter::BeginPlay()
 	
 }
 
+void APlayerCharacter::spawn()
+{
+	if (ToSpawn)
+	{
+		UWorld* world = GetWorld();
+		if (world)
+		{
+			FActorSpawnParameters spawnParams;
+			spawnParams.Owner = this;
+
+			FRotator rotator;
+
+			FVector spawnLocation = this->GetActorLocation();
+
+			AHealing_projectile* projectileRef = world->SpawnActor<AHealing_projectile>(ToSpawn, spawnLocation, rotator, spawnParams);
+
+			projectileRef->setTrajectory(projectileTrajectory);
+		}
+	}
+}
+
 // Called every frame
 void APlayerCharacter::Tick(float DeltaTime)
 {
@@ -75,7 +96,7 @@ void APlayerCharacter::Tick(float DeltaTime)
 			FHitResult TraceHitResult;
 			PC->GetHitResultUnderCursor(ECC_Visibility, true, TraceHitResult);
 			FVector CursorFV = TraceHitResult.ImpactNormal;
-			ProjectileTrajectory = CursorFV;
+			projectileTrajectory = CursorFV;
 			FRotator CursorR = CursorFV.Rotation();
 			CursorToWorld->SetWorldLocation(TraceHitResult.Location);
 			CursorToWorld->SetWorldRotation(CursorR);
@@ -95,6 +116,8 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 	InputComponent->BindAction("Jump", IE_Released, this, &APlayerCharacter::StopJump);
 
 	InputComponent->BindAction("Interact", IE_Pressed, this, &APlayerCharacter::Interact);
+
+	InputComponent->BindAction("AttackLine", IE_Pressed, this, &APlayerCharacter::spawn);
 }
 
 void APlayerCharacter::MoveX(float Value)

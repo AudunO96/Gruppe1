@@ -14,19 +14,31 @@ UCLASS()
 class GRUPPE1_API AHealing_projectile : public AHealing_base
 {
 	GENERATED_BODY()
+
+	/** Sphere collision component */
+	UPROPERTY(VisibleDefaultsOnly, Category = Projectile)
+	class USphereComponent* CollisionComp;
+
+	/** Projectile movement component */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Movement, meta = (AllowPrivateAccess = "true"))
+	class UProjectileMovementComponent* ProjectileMovement;
 	
 public:
+	AHealing_projectile();
 	void setTrajectory(FVector trajectory);
 
 
 protected:
-	float travelLength;
-	float lengthTraveled{0};
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
 
-	UPROPERTY(EditAnywhere)
+	float travelLength{ 1 };
+	float lengthTraveled{ 0 };
+
+	UPROPERTY(EditAnywhere, Category = "Movement")
 	float speed;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Movement")
 	float groundOffset;
 
 

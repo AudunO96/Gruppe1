@@ -4,7 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Healing_projectile.h"
 #include "PlayerCharacter.generated.h"
+
 
 UCLASS()
 class GRUPPE1_API APlayerCharacter : public ACharacter
@@ -18,6 +20,12 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+	UFUNCTION(BlueprintCallable, Category = "Spawn")
+	void spawn();
+
+	UPROPERTY(EditAnywhere, Category = "Spawn")
+	TSubclassOf<class AHealing_projectile> ToSpawn;
 
 public:	
 	// Called every frame
@@ -76,5 +84,5 @@ private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 		class UDecalComponent* CursorToWorld;
 
-	FVector ProjectileTrajectory;
+	FVector projectileTrajectory;
 };
