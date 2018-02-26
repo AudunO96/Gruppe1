@@ -11,6 +11,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "MyPlayerController.h"
 #include "Math/Vector.h"
+#include "Engine.h"
 
 // Sets default values
 APlayerCharacter::APlayerCharacter()
@@ -62,25 +63,31 @@ void APlayerCharacter::BeginPlay()
 	
 }
 
-void APlayerCharacter::spawn()
+
+void APlayerCharacter::fireProjectile()
 {
-	if (ToSpawn)
+	if (ToSpawnProjectile)
 	{
-		UWorld* world = GetWorld();
+		UWorld* world = this->GetWorld();
+
 		if (world)
 		{
 			FActorSpawnParameters spawnParams;
-			spawnParams.Owner = this;
+			//spawnParams.Owner = this;
 
 			FRotator rotator;
 
-			FVector spawnLocation = this->GetActorLocation();
+			FVector spawnLocation = this->GetActorLocation() + (100,100,100);
 
-			AHealing_projectile* projectileRef = world->SpawnActor<AHealing_projectile>(ToSpawn, spawnLocation, rotator, spawnParams);
+			AHealing_projectile* projectileRef = world->SpawnActor<AHealing_projectile>(ToSpawnProjectile, spawnLocation, rotator, spawnParams);
 
-			projectileRef->setTrajectory(projectileTrajectory);
+			//projectileRef->setTrajectory(projectileTrajectory);
 		}
 	}
+}
+
+void APlayerCharacter::coneSpell()
+{
 }
 
 // Called every frame
@@ -117,12 +124,13 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 
 	InputComponent->BindAction("Interact", IE_Pressed, this, &APlayerCharacter::Interact);
 
-	InputComponent->BindAction("AttackLine", IE_Pressed, this, &APlayerCharacter::spawn);
+	InputComponent->BindAction("AttackLine", IE_Pressed, this, &APlayerCharacter::fireProjectile);
+	InputComponent->BindAction("AttackCone", IE_Pressed, this, &APlayerCharacter::coneSpell);
 }
 
 void APlayerCharacter::MoveX(float Value)
 {
-	// finner retningen karakteren står i
+	// finner retningen karakteren staar i
 	FRotator Rotation = Controller->GetControlRotation();
 
 	// legger til bevegelse i retningen
@@ -132,7 +140,7 @@ void APlayerCharacter::MoveX(float Value)
 
 void APlayerCharacter::MoveY(float Value)
 {
-	// finner retningen karakteren står i
+	// finner retningen karakteren staar i
 	FRotator Rotation = Controller->GetControlRotation();
 
 	// legger til bevegelse i retningen

@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Healing_projectile.h"
+#include "Healing_DOT.h"
 #include "PlayerCharacter.generated.h"
 
 
@@ -22,10 +23,16 @@ protected:
 	virtual void BeginPlay() override;
 
 	UFUNCTION(BlueprintCallable, Category = "Spawn")
-	void spawn();
+	void fireProjectile();
+
+	UFUNCTION(BlueprintCallable, Category = "Spawn")
+	void coneSpell();
 
 	UPROPERTY(EditAnywhere, Category = "Spawn")
-	TSubclassOf<class AHealing_projectile> ToSpawn;
+	TSubclassOf<class AHealing_projectile> ToSpawnProjectile;
+
+	UPROPERTY(EditAnywhere, Category = "Spawn")
+	TSubclassOf<class AHealing_DOT> ToSpawnCone;
 
 public:	
 	// Called every frame
