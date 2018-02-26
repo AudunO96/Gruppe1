@@ -29,12 +29,5 @@ protected:
 
 public:	
 	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
-private:
-	float lifeTime{0};
-
-	UPROPERTY(EditAnywhere, Category = "Healing Properties")
-	float lifeTimeMax;
-	
+	virtual void Tick(float DeltaTime) override;	
 };

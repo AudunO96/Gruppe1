@@ -31,8 +31,14 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Spawn")
 	TSubclassOf<class AHealing_projectile> ToSpawnProjectile;
 
-	UPROPERTY(EditAnywhere, Category = "Spawn")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Spawn")
 	TSubclassOf<class AHealing_DOT> ToSpawnCone;
+
+	UPROPERTY(EditAnywhere, Category = "Spawn")
+		float offsetProjectile;
+
+	UPROPERTY(EditAnywhere, Category = "Spawn")
+		float offsetCone;
 
 public:	
 	// Called every frame
