@@ -23,10 +23,6 @@ void AHealing_base::BeginPlay()
 void AHealing_base::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	lifeTime += DeltaTime;
-
-	//if (lifeTimeMax <= lifeTime)
-		//Destroy();
 }
 
 float AHealing_base::deliverHealing(float deltaTime)

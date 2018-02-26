@@ -5,6 +5,7 @@
 #include "UObject/ConstructorHelpers.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Components/SphereComponent.h"
+#include "CharacterBehaviour/PlayerCharacter.h"
 
 
 AHealing_projectile::AHealing_projectile()
@@ -28,31 +29,12 @@ AHealing_projectile::AHealing_projectile()
 	ProjectileMovement->InitialSpeed = 3000.f;
 	ProjectileMovement->MaxSpeed = 3000.f;
 	ProjectileMovement->bRotationFollowsVelocity = true;
-	ProjectileMovement->bShouldBounce = true;
 
-	// Die after 3 seconds by default
+	//sets default life span of projectile to 3 seconds
 	InitialLifeSpan = 3.0f;
 }
 
-// Called every frame
-void AHealing_projectile::Tick(float DeltaTime)
+void AHealing_projectile::OnHit(UPrimitiveComponent * HitComp, AActor * OtherActor, UPrimitiveComponent * OtherComp, FVector NormalImpulse, const FHitResult & Hit)
 {
-	Super::Tick(DeltaTime);
-}
-
-void AHealing_projectile::BeginPlay()
-{
-	FVector velocity;
-	velocity.X = speed;
-	GetRootComponent()->ComponentVelocity = velocity;
-}
-
-// sets the travel length and orientation for the projectile
-void AHealing_projectile::setTrajectory(FVector trajectory)
-{
-	trajectory.Y += groundOffset;
-
-	SetActorRotation(trajectory.Rotation());
-
-	travelLength = trajectory.Size();
+	Destroy();
 }

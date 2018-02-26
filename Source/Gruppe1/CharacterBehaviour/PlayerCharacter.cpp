@@ -75,9 +75,9 @@ void APlayerCharacter::fireProjectile()
 			FActorSpawnParameters spawnParams;
 			//spawnParams.Owner = this;
 
-			FRotator rotator;
+			FRotator rotator = this->GetActorRotation();
 
-			FVector spawnLocation = this->GetActorLocation() + (100,100,100);
+			FVector spawnLocation = this->GetActorLocation() + (this->GetActorForwardVector() * offsetProjectile);
 
 			AHealing_projectile* projectileRef = world->SpawnActor<AHealing_projectile>(ToSpawnProjectile, spawnLocation, rotator, spawnParams);
 
@@ -88,6 +88,27 @@ void APlayerCharacter::fireProjectile()
 
 void APlayerCharacter::coneSpell()
 {
+	if (ToSpawnCone)
+	{
+		UWorld* World = this->GetWorld();
+
+		if (World)
+		{
+			FActorSpawnParameters spawnParams;
+			spawnParams.Owner = this;
+			
+			FRotator rotator = this->GetActorRotation();
+			FVector spawnLocation = this->GetActorLocation() + (this->GetActorForwardVector() * offsetCone);
+
+			World->SpawnActor<AHealing_DOT>(ToSpawnCone, spawnLocation, rotator, spawnParams);
+
+			//projectileRef->setTrajectory(projectileTrajectory);
+		}
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("nothing is pointed at here"));
+	}
 }
 
 // Called every frame
