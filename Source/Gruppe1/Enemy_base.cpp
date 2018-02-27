@@ -2,6 +2,7 @@
 
 #include "Enemy_base.h"
 #include "Healing_base.h"
+#include "Healing_projectile.h"
 
 
 // Sets default values
@@ -11,11 +12,16 @@ AEnemy_base::AEnemy_base()
 	PrimaryActorTick.bCanEverTick = true;
 }
 
-void AEnemy_base::recieveHealing(float incomingHealing)
+float AEnemy_base::recieveHealing(float incomingHealing)
 {
 	health -= incomingHealing;
 
 	health = FMath::Clamp(health, 0.0f, maxHealth);
+
+	if (health == 0.0f)
+		RemoveCorruption();
+
+	return health;
 }
 
 float AEnemy_base::getHealth()
@@ -40,6 +46,11 @@ void AEnemy_base::BeginPlay()
 	
 }
 
+void AEnemy_base::RemoveCorruption()
+{
+	UE_LOG(LogTemp, Warning, TEXT("%s is now healed"), *this->GetName())
+}
+
 // Called every frame
 void AEnemy_base::Tick(float DeltaTime)
 {
@@ -53,11 +64,3 @@ void AEnemy_base::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
 }
-
-void AEnemy_base::OnOverlapBegin(UPrimitiveComponent * OverlappedComp, AActor * OtherActor, UPrimitiveComponent * OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult)
-{
-	AHealing_base* healingRef = Cast<AHealing_base>(OtherActor);
-
-	recieveHealing(healingRef->deliverHealing());
-}
-
