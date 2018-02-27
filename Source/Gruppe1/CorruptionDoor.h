@@ -34,9 +34,9 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Corruption Scoring")
 		float percentNeeded;
 
-	UPROPERTY(EditAnywhere, Category = "Corruption Scoring")
-		float corruptionPointsNeeded;
+	UPROPERTY(VisibleAnywhere, Category = "Corruption Scoring")
+	float corruptionPointsNeeded = 0.0f;
 
-	UPROPERTY(EditAnywhere, Category = "Corruption Scoring")
-		float corruptionPointsTotal;
+	UPROPERTY(VisibleAnywhere, Category = "Corruption Scoring")
+	float corruptionPointsTotal = 0.0f;
 };
