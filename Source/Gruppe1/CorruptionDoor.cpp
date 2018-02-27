@@ -22,13 +22,21 @@ void ACorruptionDoor::ReadAndDelete(float corruptionPoints)
 {
 	corruptionPointsTotal += corruptionPoints;
 
-	if (corruptionPointsTotal / corruptionPointsNeeded > percentNeeded)
-		delete this;
+	if (corruptionPointsNeeded != 0)
+	{
+		if (corruptionPointsTotal / corruptionPointsNeeded >= percentNeeded)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("DELET THIS"))
+
+				Destroy();
+		}
+	}
+		
 }
 
 void ACorruptionDoor::ChangeCorruptionNeeded(float corruptionNeeded)
 {
-	percentNeeded += corruptionNeeded;
+	corruptionPointsNeeded += corruptionNeeded;
 }
 
 // Called every frame

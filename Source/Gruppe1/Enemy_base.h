@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
+#include "CorruptionDoor.h"
 #include "Enemy_base.generated.h"
 
 UCLASS()
@@ -41,6 +42,8 @@ protected:
 	UFUNCTION(BlueprintCallable)
 	void RemoveCorruption();
 
+	UPROPERTY(EditAnywhere, Category = "Door")
+	ACorruptionDoor* Doorptr = nullptr;
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
