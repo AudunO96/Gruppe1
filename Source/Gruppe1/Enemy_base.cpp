@@ -12,37 +12,31 @@ AEnemy_base::AEnemy_base()
 	PrimaryActorTick.bCanEverTick = true;
 }
 
-float AEnemy_base::recieveHealing(float IncomingHealing)
+float AEnemy_base::recieveHealing(float incomingHealing)
 {
-	if (Health < IncomingHealing)
-	{
-		IncomingHealing = Health;
-	}
-	Health -= IncomingHealing;
+	health -= incomingHealing;
 
-	Doorptr->ReadAndDelete(IncomingHealing);
+	health = FMath::Clamp(health, 0.0f, maxHealth);
 
-	Health = FMath::Clamp(Health, 0.0f, MaxHealth);
-
-	if (Health == 0.0f)
+	if (health == 0.0f)
 		RemoveCorruption();
 
-	return Health;
+	return health;
 }
 
-float AEnemy_base::GetHealth()
+float AEnemy_base::getHealth()
 {
-	return Health;
+	return health;
 }
 
-float AEnemy_base::GetMaxHealth()
+float AEnemy_base::getMaxHealth()
 {
-	return MaxHealth;
+	return maxHealth;
 }
 
-void AEnemy_base::SetHealth()
+void AEnemy_base::setHealth()
 {
-	Health = MaxHealth;
+	health = maxHealth;
 }
 
 // Called when the game starts or when spawned
@@ -50,7 +44,6 @@ void AEnemy_base::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	Doorptr->ChangeCorruptionNeeded(MaxHealth);
 }
 
 void AEnemy_base::RemoveCorruption()
