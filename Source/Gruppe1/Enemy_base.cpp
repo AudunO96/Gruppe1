@@ -2,6 +2,8 @@
 
 #include "Enemy_base.h"
 #include "Healing_base.h"
+#include "GameFramework/Actor.h"
+#include "algorithm"
 #include "Healing_projectile.h"
 
 
@@ -14,7 +16,12 @@ AEnemy_base::AEnemy_base()
 
 float AEnemy_base::recieveHealing(float incomingHealing)
 {
+	incomingHealing = std::min(incomingHealing, health);
+
 	health -= incomingHealing;
+
+	if(Doorptr)
+		Doorptr->ReadAndDelete(incomingHealing);
 
 	health = FMath::Clamp(health, 0.0f, maxHealth);
 
@@ -43,7 +50,9 @@ void AEnemy_base::setHealth()
 void AEnemy_base::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+	if (Doorptr)
+		Doorptr->ChangeCorruptionNeeded(maxHealth);
 }
 
 void AEnemy_base::RemoveCorruption()
