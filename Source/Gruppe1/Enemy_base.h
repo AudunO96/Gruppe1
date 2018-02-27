@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
+#include "CorruptionDoor.h"
 #include "Enemy_base.generated.h"
 
 UCLASS()
@@ -19,23 +20,26 @@ public:
 		float recieveHealing(float incomingHealing);
 
 	UFUNCTION(BlueprintCallable)
-		float getHealth();
+		float GetHealth();
 
 	UFUNCTION(BlueprintCallable)
-		float getMaxHealth();
+		float GetMaxHealth();
 
 	UFUNCTION(BlueprintCallable)
-		void setHealth();
+		void SetHealth();
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 	UPROPERTY(editAnywhere)
-	float maxHealth;
+	float MaxHealth;
 
 	UPROPERTY(VisibleAnywhere)
-	float health;
+	float Health;
+
+	UPROPERTY(EditAnywhere, Category = "Door")
+	ACorruptionDoor* Doorptr = nullptr;
 
 	//Gets called when corruption is 0
 	UFUNCTION(BlueprintCallable)
