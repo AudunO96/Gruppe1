@@ -19,12 +19,20 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+public:	
+	
+	//Reads the total value and deletes the door if the total value >= value needed
 	UFUNCTION(BlueprintCallable, Category = "Corruption Scoring")
 		void ReadAndDelete(float corruptionPoints);
 
-public:	
+	UFUNCTION(BlueprintCallable, Category = "Corruption Scoring")
+		void ChangeCorruptionNeeded(float corruptionNeeded);
+	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	UPROPERTY(EditAnywhere, Category = "Corruption Scoring")
+		float percentNeeded;
 
 	UPROPERTY(EditAnywhere, Category = "Corruption Scoring")
 		float corruptionPointsNeeded;

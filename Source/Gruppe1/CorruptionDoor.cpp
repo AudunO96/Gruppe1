@@ -22,8 +22,13 @@ void ACorruptionDoor::ReadAndDelete(float corruptionPoints)
 {
 	corruptionPointsTotal += corruptionPoints;
 
-	if (corruptionPointsTotal >= corruptionPointsNeeded)
+	if (corruptionPointsTotal / corruptionPointsNeeded > percentNeeded)
 		delete this;
+}
+
+void ACorruptionDoor::ChangeCorruptionNeeded(float corruptionNeeded)
+{
+	percentNeeded += corruptionNeeded;
 }
 
 // Called every frame
