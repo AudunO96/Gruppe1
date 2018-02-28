@@ -78,10 +78,17 @@ public:
 
 	UFUNCTION()
 		void StopJump();
+
+	UFUNCTION()
+		void stopConeSpell();
 	/*
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Upgrades")
 	TArray<bool> Upgrades;
 	*/
+
+	/** Sphere collision component */
+	UPROPERTY(VisibleDefaultsOnly, Category = Character)
+		class UCapsuleComponent* CollisionComp;
 
 private: 
 	
@@ -96,6 +103,8 @@ private:
 	/** A decal that projects to the cursor location. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 		class UDecalComponent* CursorToWorld;
+
+	bool bCone = false;
 
 	FVector projectileTrajectory;
 };
