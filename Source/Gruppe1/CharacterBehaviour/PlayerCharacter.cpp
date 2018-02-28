@@ -4,20 +4,27 @@
 #include "Gruppe1.h"
 #include "Materials/Material.h"
 #include "Components/DecalComponent.h"
+#include "Components/CapsuleComponent.h"
 #include "UObject/ConstructorHelpers.h"
 #include "GameFramework/PlayerController.h"
 #include "GameFramework/SpringArmComponent.h"
-#include "Camera/CameraComponent.h"
+#include "GameFramework/Actor.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Camera/CameraComponent.h"
 #include "MyPlayerController.h"
+#include "Healing_DOT.h"
 #include "Math/Vector.h"
 #include "Engine.h"
+
 
 // Sets default values
 APlayerCharacter::APlayerCharacter()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
+	// Set as root component
+	RootComponent = CollisionComp;
 
 	// Don't rotate character to camera direction
 	bUseControllerRotationPitch = false;
@@ -88,21 +95,29 @@ void APlayerCharacter::fireProjectile()
 
 void APlayerCharacter::coneSpell()
 {
+	bCone = true;
 	if (ToSpawnCone)
 	{
 		UWorld* World = this->GetWorld();
 
-		if (World)
+		if (bCone)
 		{
-			FActorSpawnParameters spawnParams;
-			spawnParams.Owner = this;
-			
-			FRotator rotator = this->GetActorRotation();
-			FVector spawnLocation = this->GetActorLocation() + (this->GetActorForwardVector() * offsetCone);
+			if (World)
+			{
+				FActorSpawnParameters spawnParams;
+				spawnParams.Owner = this;
 
-			World->SpawnActor<AHealing_DOT>(ToSpawnCone, spawnLocation, rotator, spawnParams);
+				FRotator rotator = this->GetActorRotation();
+				FVector spawnLocation = this->GetActorLocation() + (this->GetActorForwardVector() * offsetCone);
 
-			//projectileRef->setTrajectory(projectileTrajectory);
+				World->SpawnActor<AHealing_DOT>(ToSpawnCone, spawnLocation, rotator, spawnParams);
+				/*
+					FString stringRef = CollisionComp->GetName();
+					FName nameRef = FName(*stringRef);
+					Cast<AHealing_DOT>(ToSpawnCone)->AttachTo(this, nameRef, EAttachLocation::SnapToTarget, false);
+				*/
+				//projectileRef->setTrajectory(projectileTrajectory);
+			}
 		}
 	}
 	else
@@ -146,7 +161,10 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 	InputComponent->BindAction("Interact", IE_Pressed, this, &APlayerCharacter::Interact);
 
 	InputComponent->BindAction("AttackLine", IE_Pressed, this, &APlayerCharacter::fireProjectile);
+
 	InputComponent->BindAction("AttackCone", IE_Pressed, this, &APlayerCharacter::coneSpell);
+	InputComponent->BindAction("AttackLine", IE_Released, this, &APlayerCharacter::stopConeSpell);
+
 }
 
 void APlayerCharacter::MoveX(float Value)
@@ -184,4 +202,9 @@ void APlayerCharacter::StopJump()
 {
 	bPressedJump = false;
 	isJumping = !isJumping;
+}
+
+void APlayerCharacter::stopConeSpell()
+{
+	bCone = false;
 }
