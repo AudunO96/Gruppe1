@@ -81,6 +81,9 @@ public:
 
 	UFUNCTION()
 		void stopConeSpell();
+
+	UFUNCTION(BlueprintCallable, Category = "Death")
+		void OnDeath();
 	/*
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Upgrades")
 	TArray<bool> Upgrades;

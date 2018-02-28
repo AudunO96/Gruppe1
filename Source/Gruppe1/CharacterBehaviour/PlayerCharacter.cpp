@@ -208,3 +208,8 @@ void APlayerCharacter::stopConeSpell()
 {
 	bCone = false;
 }
+
+void APlayerCharacter::OnDeath()
+{
+}
+
