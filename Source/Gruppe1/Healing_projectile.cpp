@@ -34,7 +34,32 @@ AHealing_projectile::AHealing_projectile()
 	InitialLifeSpan = 3.0f;
 }
 
-void AHealing_projectile::OnHit(UPrimitiveComponent * HitComp, AActor * OtherActor, UPrimitiveComponent * OtherComp, FVector NormalImpulse, const FHitResult & Hit)
+	/*void AHealing_projectile::OnOverlapBegin(UPrimitiveComponent* OverlappedComp,
+		AActor* OtherActor,
+		UPrimitiveComponent* OtherComp,
+		int32 OtherBodyIndex,
+		bool bFromSweep,
+		const FHitResult& SweepResult)
 {
-	Destroy();
-}
+	UE_LOG(LogTemp, Warning, TEXT("HIT!"))
+
+		AHealing_base* testIfSelf = Cast<AHealing_base>(OtherActor);
+
+	if (!testIfSelf)
+	{
+		AEnemy_base* target = Cast<AEnemy_base>(OtherActor);
+
+		if (target)
+		{
+			deliverHealing(target);
+		}
+		else
+		{
+			Destroy();
+		}
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("%s is hitting itself"), *this->GetName())
+	}
+}*/
