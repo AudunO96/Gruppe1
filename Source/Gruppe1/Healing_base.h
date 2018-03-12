@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Components/SphereComponent.h"
+#include "Enemy_base.h"
 #include "Healing_base.generated.h"
 
 UCLASS()
@@ -16,16 +18,29 @@ public:
 	AHealing_base();
 
 	UFUNCTION(BlueprintCallable)
-	float deliverHealing(float deltaTime = 1.0f);
+	virtual void deliverHealing(AEnemy_base* target);
+
+	UFUNCTION()
+	virtual void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, 
+		AActor* OtherActor, 
+		UPrimitiveComponent* OtherComp, 
+		int32 OtherBodyIndex, 
+		bool bFromSweep, 
+		const FHitResult& SweepResult);
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	
+	USphereComponent* CollisionComp;
+
+	UPROPERTY(EditAnywhere, Category = "Collision init")
+	float CollisionRadius;
 
 	UPROPERTY(EditAnywhere, Category = "Healing Properties")
 	float healStrength;
+
+	
 
 public:	
 	// Called every frame
