@@ -6,7 +6,6 @@
 #include "GameFramework/Actor.h"
 #include "Components/SphereComponent.h"
 #include "Enemy_base.h"
-#include <vector>
 #include "Healing_base.generated.h"
 
 UCLASS()
@@ -19,8 +18,9 @@ public:
 	AHealing_base();
 
 	UFUNCTION(BlueprintCallable)
-	void deliverHealing(AEnemy_base* target);
+	virtual void deliverHealing(AEnemy_base* target);
 
+	UFUNCTION()
 	virtual void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, 
 		AActor* OtherActor, 
 		UPrimitiveComponent* OtherComp, 
@@ -32,7 +32,6 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	std::vector<AEnemy_base> OverlappedActors;
 	USphereComponent* CollisionComp;
 
 	UPROPERTY(EditAnywhere, Category = "Collision init")

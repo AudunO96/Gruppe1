@@ -24,14 +24,13 @@ AHealing_base::AHealing_base()
 // Called when the game starts or when spawned
 void AHealing_base::BeginPlay()
 {
-	Super::BeginPlay();
 
 }
 
 // Called every frame
 void AHealing_base::Tick(float DeltaTime)
 {
-	Super::Tick(DeltaTime);
+
 }
 
 void AHealing_base::deliverHealing(AEnemy_base* target)
