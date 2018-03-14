@@ -5,11 +5,20 @@
 
 AHealingCircle::AHealingCircle()
 {
+	CollisionComp->InitSphereRadius(CollisionRadius);
+	CollisionComp->SetCollisionProfileName(TEXT("Trigger"));
+	CollisionComp->SetupAttachment(RootComponent);
+
+	// Set as root component
+	RootComponent = CollisionComp;
+
 	CollisionComp->OnComponentEndOverlap.AddDynamic(this, &AHealingCircle::OnOverlapEnd);
 }
 
 void AHealingCircle::Tick(float DeltaTime)
 {
+	Super::Tick(DeltaTime);
+
 	for (AEnemy_base* enemy : OverlappedActors)
 	{
 		enemy->recieveHealing(healStrength * DeltaTime);

@@ -22,12 +22,14 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Particle")
 	UParticleSystem* projectileParticle;
 
+	UFUNCTION()
+	virtual void BeginPlay() override;
+
 	/** Projectile movement component */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Movement, meta = (AllowPrivateAccess = "true"))
 	class UProjectileMovementComponent* ProjectileMovement;
 
 	/** Returns CollisionComp subobject **/
-
 	FORCEINLINE class USphereComponent* GetCollisionComp() const { return CollisionComp; }
 	/** Returns ProjectileMovement subobject **/
 	FORCEINLINE class UProjectileMovementComponent* GetProjectileMovement() const { return ProjectileMovement; }

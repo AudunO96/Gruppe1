@@ -10,23 +10,25 @@
 
 AHealing_projectile::AHealing_projectile()
 {
+
 	UE_LOG(LogTemp, Warning, TEXT("projectile constructor"))
 
+	CollisionComp->InitSphereRadius(CollisionRadius);
+	CollisionComp->SetCollisionProfileName(TEXT("Trigger"));
+	CollisionComp->SetupAttachment(RootComponent);
+
+	// Players can't walk on it
+	CollisionComp->SetWalkableSlopeOverride(FWalkableSlopeOverride(WalkableSlope_Unwalkable, 0.f));
+	CollisionComp->CanCharacterStepUpOn = ECB_No;
+
+	// Set as root component
+	RootComponent = CollisionComp;
+
+	// set up overlap
+	// CollisionComp->OnComponentBeginOverlap.AddDynamic(this, &AHealing_base::OnOverlapBegin);
+
 	if(!CollisionComp)
-		UE_LOG(LogTemp, Warning, TEXT("Something wrong, yo"))
-
-	UParticleSystemComponent* particleRef = UGameplayStatics::SpawnEmitterAttached(
-		projectileParticle,
-		RootComponent,
-		FName("Trail"),
-		FVector(0.f,0.f,0.f),
-		FRotator(0.f, 0.f, 0.f),
-		EAttachLocation::KeepRelativeOffset,
-		false
-	);
-
-	if(!particleRef)
-		UE_LOG(LogTemp, Warning, TEXT("Particle not spawned"))
+		UE_LOG(LogTemp, Warning, TEXT("Collision component missing"))
 
 	// Use a ProjectileMovementComponent to govern this projectile's movement
 	ProjectileMovement = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileComp"));
@@ -35,6 +37,29 @@ AHealing_projectile::AHealing_projectile()
 	ProjectileMovement->MaxSpeed = 3000.f;
 	ProjectileMovement->bRotationFollowsVelocity = true;
 
-	//sets default life span of projectile to 3 seconds
+	if(!ProjectileMovement)
+		UE_LOG(LogTemp, Warning, TEXT("Projectile movement is missing"))
+
+	// sets default life span of projectile to 3 seconds
 	InitialLifeSpan = 3.0f;
+}
+
+void AHealing_projectile::BeginPlay()
+{
+	Super::BeginPlay();
+
+	UE_LOG(LogTemp, Warning, TEXT("BeginPlay projectile"))
+
+	UParticleSystemComponent* particleRef = UGameplayStatics::SpawnEmitterAttached(
+		projectileParticle,
+		RootComponent,
+		FName("Trail"),
+		FVector(0.f, 0.f, 0.f),
+		FRotator(0.f, 0.f, 0.f),
+		EAttachLocation::KeepRelativeOffset,
+		true
+	);
+
+	if (!particleRef)
+		UE_LOG(LogTemp, Warning, TEXT("Particle not spawned"))
 }
