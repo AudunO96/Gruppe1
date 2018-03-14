@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Components/SphereComponent.h"
-#include "Enemy_base.h"
+#include "EnemyBase.h"
 #include "Healing_base.generated.h"
 
 UCLASS()
@@ -18,7 +18,7 @@ public:
 	AHealing_base();
 
 	UFUNCTION(BlueprintCallable)
-	virtual void deliverHealing(AEnemy_base* target);
+	virtual void deliverHealing(AEnemyBase* target);
 
 	UFUNCTION()
 	virtual void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, 
@@ -35,7 +35,7 @@ protected:
 	USphereComponent* CollisionComp;
 
 	UPROPERTY(EditAnywhere, Category = "Collision init")
-		float CollisionRadius = 25.f;
+	float CollisionRadius = 25.f;
 
 	UPROPERTY(EditAnywhere, Category = "Healing Properties")
 	float healStrength;

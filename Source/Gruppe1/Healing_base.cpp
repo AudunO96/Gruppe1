@@ -2,6 +2,7 @@
 
 #include "Healing_base.h"
 #include "CharacterBehaviour/PlayerCharacter.h"
+#include "Engine/World.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 
 
@@ -40,7 +41,7 @@ void AHealing_base::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
-void AHealing_base::deliverHealing(AEnemy_base* target)
+void AHealing_base::deliverHealing(AEnemyBase* target)
 {
 	target->recieveHealing(healStrength);
 
@@ -56,7 +57,7 @@ void AHealing_base::OnOverlapBegin(UPrimitiveComponent* OverlappedComp,
 {
 	UE_LOG(LogTemp, Warning, TEXT("%s is hit"), *GetName())
 
-	AEnemy_base* target = Cast<AEnemy_base>(OtherActor);
+	AEnemyBase* target = Cast<AEnemyBase>(OtherActor);
 
 	APlayerCharacter* isPlayer = Cast<APlayerCharacter>(OtherActor);
 
@@ -71,4 +72,3 @@ void AHealing_base::OnOverlapBegin(UPrimitiveComponent* OverlappedComp,
 			Destroy();
 		}
 }
-	
