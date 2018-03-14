@@ -17,11 +17,13 @@ void ACorruptionDoor::BeginPlay()
 	Super::BeginPlay();
 	
 }
-
+// Handles corruption points and deletion of the door
 void ACorruptionDoor::ReadAndDelete(float corruptionPoints)
 {
+	// Increments corruptionPoints with corruptionPointsTotal
 	corruptionPointsTotal += corruptionPoints;
 
+	//Checks to see if the specific amount of points needed has been met and destroys the door if it is true
 	if (corruptionPointsNeeded != 0)
 	{
 		if (corruptionPointsTotal / corruptionPointsNeeded >= percentNeeded)
@@ -33,7 +35,12 @@ void ACorruptionDoor::ReadAndDelete(float corruptionPoints)
 	}
 		
 }
+/* 
+Increments corruptionNeeded with corruptionPointsNeeded
 
+This is updated for how many enemies are pointed at the door, and is then converted to a per cent number 
+(range from 0.0-1.0 is set in the door to see how much percent it needs)
+*/
 void ACorruptionDoor::ChangeCorruptionNeeded(float corruptionNeeded)
 {
 	corruptionPointsNeeded += corruptionNeeded;

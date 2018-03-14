@@ -31,12 +31,15 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	//Here we set the percent of healing needed for the door to disappear
 	UPROPERTY(EditAnywhere, Category = "Corruption Scoring")
 		float percentNeeded;
 
+	//Total points of corruption needed for the door to disappear
 	UPROPERTY(VisibleAnywhere, Category = "Corruption Scoring")
 	float corruptionPointsNeeded = 0.0f;
 
+	//Here we add the total corruption points together, which is then compared to corruptionPointsNeeded
 	UPROPERTY(VisibleAnywhere, Category = "Corruption Scoring")
 	float corruptionPointsTotal = 0.0f;
 };
