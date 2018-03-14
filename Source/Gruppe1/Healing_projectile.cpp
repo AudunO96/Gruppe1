@@ -41,7 +41,7 @@ AHealing_projectile::AHealing_projectile()
 		UE_LOG(LogTemp, Warning, TEXT("Projectile movement is missing"))
 
 	// sets default life span of projectile to 3 seconds
-	InitialLifeSpan = 3.0f;
+	InitialLifeSpan = .5f;
 }
 
 void AHealing_projectile::BeginPlay()

@@ -30,7 +30,9 @@ float AEnemy_base::recieveHealing(float incomingHealing)
 	health = FMath::Clamp(health, 0.0f, maxHealth);
 
 	if (health == 0.0f)
-		RemoveCorruption();
+		removeCorruption();
+
+	UE_LOG(LogTemp, Error, TEXT("TRUE OR FALSE: %s"), (bGenerateOverlapEventsDuringLevelStreaming ? TEXT("True") : TEXT("False")))
 
 	return health;
 }
@@ -59,9 +61,16 @@ void AEnemy_base::BeginPlay()
 		Doorptr->ChangeCorruptionNeeded(maxHealth);
 }
 
-void AEnemy_base::RemoveCorruption()
+//void AEnemy_base::RemoveCorruption()
+//{
+//	UE_LOG(LogTemp, Warning, TEXT("%s is now healed"), *this->GetName())
+//
+//	removeCorruptionBP();
+//}
+
+void AEnemy_base::removeCorruption()
 {
-	UE_LOG(LogTemp, Warning, TEXT("%s is now healed"), *this->GetName())
+	isCorrupt = false;
 }
 
 // Called every frame

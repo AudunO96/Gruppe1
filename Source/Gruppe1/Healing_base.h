@@ -35,7 +35,7 @@ protected:
 	USphereComponent* CollisionComp;
 
 	UPROPERTY(EditAnywhere, Category = "Collision init")
-	float CollisionRadius;
+		float CollisionRadius = 25.f;
 
 	UPROPERTY(EditAnywhere, Category = "Healing Properties")
 	float healStrength;
