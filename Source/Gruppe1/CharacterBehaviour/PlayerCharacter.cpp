@@ -73,19 +73,25 @@ void APlayerCharacter::BeginPlay()
 
 void APlayerCharacter::fireProjectile()
 {
+	// Checks if the projectile exists
 	if (ToSpawnProjectile)
 	{
 		UWorld* world = this->GetWorld();
 
+		//checks if the world exists
 		if (world)
 		{
+			// Sets spawn parameters and makes the player character its owner
 			FActorSpawnParameters spawnParams;
 			spawnParams.Owner = this;
 
+			// Gets and sets rotation of projectile to be the same as character
 			FRotator rotator = this->GetActorRotation();
 
+			// Gets and sets location of projectile to be the same as character + a specified offset
 			FVector spawnLocation = this->GetActorLocation() + (this->GetActorForwardVector() * offsetProjectile);
 
+			// Spawns actor at the specified parameters given
 			world->SpawnActor<AHealing_projectile>(
 				ToSpawnProjectile, 
 				spawnLocation, 
@@ -102,6 +108,7 @@ void APlayerCharacter::fireProjectile()
 
 void APlayerCharacter::coneSpell()
 {
+	// Checks if the projectile exists
 	bCone = true;
 	if (ToSpawnCone)
 	{
@@ -109,14 +116,18 @@ void APlayerCharacter::coneSpell()
 
 		if (bCone)
 		{
+			//checks if the world exists
 			if (World)
 			{
+				// Sets spawn parameters and makes the player character its owner
 				FActorSpawnParameters spawnParams;
 				spawnParams.Owner = this;
 
+				// Gets and sets rotation of projectile to be the same as character
 				FRotator rotator = this->GetActorRotation();
 				FVector spawnLocation = this->GetActorLocation() + (this->GetActorForwardVector() * offsetCone);
 
+				// Spawns actor at the specified parameters given
 				World->SpawnActor<AHealing_DOT>(ToSpawnCone, 
 					spawnLocation, 
 					rotator, 
@@ -131,21 +142,32 @@ void APlayerCharacter::coneSpell()
 	}
 }
 
+// Adding functionality for the animations of the character
+void APlayerCharacter::stopConeSpell()
+{
+	bCone = false;
+}
+
 // Called every frame
 void APlayerCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	// Checks if the cursor pointer points to something
 	if (CursorToWorld != nullptr)
 	{
+		// Checks if the world exists
 		if (UWorld* World = GetWorld())
 		{
+			// Casts to player controller
 			AMyPlayerController* PC = Cast<AMyPlayerController>(GetController());
+			// Runs a hit result under cursor
 			FHitResult TraceHitResult;
 			PC->GetHitResultUnderCursor(ECC_Visibility, true, TraceHitResult);
 			FVector CursorFV = TraceHitResult.ImpactNormal;
 			projectileTrajectory = CursorFV;
 			FRotator CursorR = CursorFV.Rotation();
+			// Sets the decal on hit surface
 			CursorToWorld->SetWorldLocation(TraceHitResult.Location);
 			CursorToWorld->SetWorldRotation(CursorR);
 		}
@@ -207,11 +229,6 @@ void APlayerCharacter::StopJump()
 {
 	bPressedJump = false;
 	isJumping = !isJumping;
-}
-
-void APlayerCharacter::stopConeSpell()
-{
-	bCone = false;
 }
 
 void APlayerCharacter::OnDeath()
