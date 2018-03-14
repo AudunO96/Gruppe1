@@ -21,6 +21,9 @@ public:
 	UFUNCTION(BlueprintImplementableEvent, Category = "HUD")
 		void updateHealthbar();
 
+	/*UFUNCTION(BlueprintImplementableEvent, Category = "Healing")
+		void removeCorruptionBP();
+*/
 	UFUNCTION(BlueprintCallable)
 		float getHealth();
 
@@ -29,6 +32,8 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 		void setHealth();
+
+	FORCEINLINE bool getIsCorrupt() { return isCorrupt; };
 
 protected:
 	// Called when the game starts or when spawned
@@ -41,11 +46,14 @@ protected:
 	float health;
 
 	//Gets called when corruption is 0
-	UFUNCTION(BlueprintCallable)
-	void RemoveCorruption();
+	UFUNCTION(BlueprintCallable, Category = "Healing")
+	void removeCorruption();
 
 	UPROPERTY(EditAnywhere, Category = "Door")
 	ACorruptionDoor* Doorptr = nullptr;
+
+	UPROPERTY()
+	bool isCorrupt = true;
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

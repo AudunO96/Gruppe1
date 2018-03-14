@@ -60,13 +60,15 @@ void AHealing_base::OnOverlapBegin(UPrimitiveComponent* OverlappedComp,
 
 	APlayerCharacter* isPlayer = Cast<APlayerCharacter>(OtherActor);
 
-	if (target)
-	{
-		deliverHealing(target);
-	}
-	else if(OtherActor != this && !isPlayer)
-	{
-		Destroy();
-	}
+	
+		if (target)
+		{
+			if(target->getIsCorrupt())
+				deliverHealing(target);
+		}
+		else if (OtherActor != this && !isPlayer)
+		{
+			Destroy();
+		}
 }
 	
