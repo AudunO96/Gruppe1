@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Healing_base.h"
+#include "ParticleDefinitions.h"
 #include "Healing_projectile.generated.h"
 
 
@@ -18,16 +19,8 @@ public:
 
 	AHealing_projectile();
 	
-	/** Sphere collision component */
-	/*UPROPERTY(VisibleDefaultsOnly, Category = Projectile)
-	class USphereComponent* CollisionComp;*/
-
-	/*virtual void OnOverlapBegin(UPrimitiveComponent* OverlappedComp,
-		AActor* OtherActor,
-		UPrimitiveComponent* OtherComp,
-		int32 OtherBodyIndex,
-		bool bFromSweep,
-		const FHitResult& SweepResult) override;*/
+	UPROPERTY(EditAnywhere, Category = "Particle")
+	UParticleSystem* projectileParticle;
 
 	/** Projectile movement component */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Movement, meta = (AllowPrivateAccess = "true"))

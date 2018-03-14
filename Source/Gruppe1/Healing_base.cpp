@@ -7,24 +7,28 @@
 // Sets default values
 AHealing_base::AHealing_base()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	UE_LOG(LogTemp, Warning, TEXT("base constructor"))
 
 	CollisionComp = CreateDefaultSubobject<USphereComponent>(TEXT("Sphere Component"));
 	CollisionComp->InitSphereRadius(CollisionRadius);
 	CollisionComp->SetCollisionProfileName(TEXT("Trigger"));
 	CollisionComp->SetupAttachment(RootComponent);
 
-	if (!CollisionComp)
-		UE_LOG(LogTemp, Error, TEXT("Collision for %s is missing"), *this->GetName())
-	else
-		CollisionComp->OnComponentBeginOverlap.AddDynamic(this, &AHealing_base::OnOverlapBegin);
+	// Players can't walk on it
+	CollisionComp->SetWalkableSlopeOverride(FWalkableSlopeOverride(WalkableSlope_Unwalkable, 0.f));
+	CollisionComp->CanCharacterStepUpOn = ECB_No;
+
+	// Set as root component
+	RootComponent = CollisionComp;
+
+	// set up overlap
+	CollisionComp->OnComponentBeginOverlap.AddDynamic(this, &AHealing_base::OnOverlapBegin);
 }
 
 // Called when the game starts or when spawned
 void AHealing_base::BeginPlay()
 {
-
+	UE_LOG(LogTemp, Warning, TEXT("It's-a me, healing"))
 }
 
 // Called every frame

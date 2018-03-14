@@ -80,16 +80,23 @@ void APlayerCharacter::fireProjectile()
 		if (world)
 		{
 			FActorSpawnParameters spawnParams;
-			//spawnParams.Owner = this;
+			spawnParams.Owner = this;
 
 			FRotator rotator = this->GetActorRotation();
 
 			FVector spawnLocation = this->GetActorLocation() + (this->GetActorForwardVector() * offsetProjectile);
 
-			AHealing_projectile* projectileRef = world->SpawnActor<AHealing_projectile>(ToSpawnProjectile, spawnLocation, rotator, spawnParams);
-
-			//projectileRef->setTrajectory(projectileTrajectory);
+			world->SpawnActor<AHealing_projectile>(
+				ToSpawnProjectile, 
+				spawnLocation, 
+				rotator, 
+				spawnParams
+				);
 		}
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Projectile is missing"))
 	}
 }
 
@@ -110,19 +117,17 @@ void APlayerCharacter::coneSpell()
 				FRotator rotator = this->GetActorRotation();
 				FVector spawnLocation = this->GetActorLocation() + (this->GetActorForwardVector() * offsetCone);
 
-				World->SpawnActor<AHealing_DOT>(ToSpawnCone, spawnLocation, rotator, spawnParams);
-				/*
-					FString stringRef = CollisionComp->GetName();
-					FName nameRef = FName(*stringRef);
-					Cast<AHealing_DOT>(ToSpawnCone)->AttachTo(this, nameRef, EAttachLocation::SnapToTarget, false);
-				*/
-				//projectileRef->setTrajectory(projectileTrajectory);
+				World->SpawnActor<AHealing_DOT>(ToSpawnCone, 
+					spawnLocation, 
+					rotator, 
+					spawnParams
+					);
 			}
 		}
 	}
 	else
 	{
-		UE_LOG(LogTemp, Warning, TEXT("nothing is pointed at here"));
+		UE_LOG(LogTemp, Warning, TEXT("Cone is missing"));
 	}
 }
 
