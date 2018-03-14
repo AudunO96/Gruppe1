@@ -20,8 +20,12 @@ float AEnemy_base::recieveHealing(float incomingHealing)
 
 	health -= incomingHealing;
 
+	this->updateHealthbar();
+
 	if(Doorptr)
 		Doorptr->ReadAndDelete(incomingHealing);
+	else
+		UE_LOG(LogTemp, Error, TEXT("Missing door pointer for: %s"), *this->GetName())
 
 	health = FMath::Clamp(health, 0.0f, maxHealth);
 

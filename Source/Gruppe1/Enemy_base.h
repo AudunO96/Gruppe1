@@ -16,8 +16,10 @@ public:
 	// Sets default values for this pawn's properties
 	AEnemy_base();
 
-	UFUNCTION(BlueprintCallable)
 		float recieveHealing(float incomingHealing);
+
+	UFUNCTION(BlueprintImplementableEvent, Category = "HUD")
+		void updateHealthbar();
 
 	UFUNCTION(BlueprintCallable)
 		float getHealth();

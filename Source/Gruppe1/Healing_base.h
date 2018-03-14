@@ -4,11 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-<<<<<<< HEAD
 #include "Components/SphereComponent.h"
 #include "Enemy_base.h"
-=======
->>>>>>> parent of 64fea4e... Broke everything
 #include "Healing_base.generated.h"
 
 UCLASS()
@@ -21,7 +18,6 @@ public:
 	AHealing_base();
 
 	UFUNCTION(BlueprintCallable)
-<<<<<<< HEAD
 	virtual void deliverHealing(AEnemy_base* target);
 
 	UFUNCTION()
@@ -31,25 +27,20 @@ public:
 		int32 OtherBodyIndex, 
 		bool bFromSweep, 
 		const FHitResult& SweepResult);
-=======
-	float deliverHealing(float deltaTime = 1.0f);
->>>>>>> parent of 64fea4e... Broke everything
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-<<<<<<< HEAD
 	USphereComponent* CollisionComp;
 
 	UPROPERTY(EditAnywhere, Category = "Collision init")
 	float CollisionRadius;
-=======
-	
->>>>>>> parent of 64fea4e... Broke everything
 
 	UPROPERTY(EditAnywhere, Category = "Healing Properties")
 	float healStrength;
+
+	
 
 public:	
 	// Called every frame

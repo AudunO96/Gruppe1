@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Healing_base.h"
+#include "ParticleDefinitions.h"
 #include "Healing_projectile.generated.h"
 
 
@@ -18,17 +19,12 @@ public:
 
 	AHealing_projectile();
 	
-	/** Sphere collision component */
-	UPROPERTY(VisibleDefaultsOnly, Category = Projectile)
-	class USphereComponent* CollisionComp;
+	UPROPERTY(EditAnywhere, Category = "Particle")
+	UParticleSystem* projectileParticle;
 
 	/** Projectile movement component */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Movement, meta = (AllowPrivateAccess = "true"))
 	class UProjectileMovementComponent* ProjectileMovement;
-
-	/* called when projectile is hitting something */
-	UFUNCTION()
-		void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
 
 	/** Returns CollisionComp subobject **/
 
