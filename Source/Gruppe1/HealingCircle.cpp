@@ -19,15 +19,15 @@ void AHealingCircle::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	for (AEnemy_base* enemy : OverlappedActors)
+	for (AEnemyBase* enemy : OverlappedActors)
 	{
 		enemy->recieveHealing(healStrength * DeltaTime);
 	}
 }
 
-void AHealingCircle::deliverHealing(AEnemy_base* target)
+void AHealingCircle::deliverHealing(AEnemyBase* target)
 {
-	for (AEnemy_base* enemy : OverlappedActors)
+	for (AEnemyBase* enemy : OverlappedActors)
 	{
 		if (enemy == target)
 		{
@@ -44,7 +44,7 @@ void AHealingCircle::OnOverlapEnd(UPrimitiveComponent* OverlappedComp,
 {
 	int pos{ 0 };
 
-	for (AEnemy_base* enemy : OverlappedActors)
+	for (AEnemyBase* enemy : OverlappedActors)
 	{
 		if (enemy == OtherActor)
 		{

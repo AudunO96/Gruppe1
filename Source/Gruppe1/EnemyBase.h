@@ -3,27 +3,29 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Pawn.h"
+#include "GameFramework/Actor.h"
+#include "Components/SphereComponent.h"
 #include "CorruptionDoor.h"
-#include "Enemy_base.generated.h"
+#include "GameFramework/Character.h"
+#include "EnemyBase.generated.h"
 
 UCLASS()
-class GRUPPE1_API AEnemy_base : public APawn
+class GRUPPE1_API AEnemyBase : public ACharacter
 {
 	GENERATED_BODY()
 
 public:
 	// Sets default values for this pawn's properties
-	AEnemy_base();
+	AEnemyBase();
 
-		float recieveHealing(float incomingHealing);
+	float recieveHealing(float incomingHealing);
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "HUD")
 		void updateHealthbar();
 
 	/*UFUNCTION(BlueprintImplementableEvent, Category = "Healing")
-		void removeCorruptionBP();
-*/
+	void removeCorruptionBP();
+	*/
 	UFUNCTION(BlueprintCallable)
 		float getHealth();
 
@@ -40,20 +42,20 @@ protected:
 	virtual void BeginPlay() override;
 
 	UPROPERTY(editAnywhere)
-	float maxHealth;
+		float maxHealth;
 
 	UPROPERTY(VisibleAnywhere)
-	float health;
+		float health;
 
 	//Gets called when corruption is 0
 	UFUNCTION(BlueprintCallable, Category = "Healing")
-	void removeCorruption();
+		void removeCorruption();
 
 	UPROPERTY(EditAnywhere, Category = "Door")
 	ACorruptionDoor* Doorptr = nullptr;
 
 	UPROPERTY()
-	bool isCorrupt = true;
+		bool isCorrupt = true;
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

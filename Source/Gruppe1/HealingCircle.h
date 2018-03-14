@@ -18,7 +18,7 @@ class GRUPPE1_API AHealingCircle : public AHealing_base
 public:
 	AHealingCircle();
 
-	void deliverHealing(AEnemy_base* target) override;
+	void deliverHealing(AEnemyBase* target) override;
 
 	UFUNCTION()
 	void OnOverlapEnd(UPrimitiveComponent* OverlappedComp, 
@@ -27,7 +27,7 @@ public:
 		int32 OtherBodyIndex);
 	
 private:
-	std::vector<AEnemy_base*> OverlappedActors;
+	std::vector<AEnemyBase*> OverlappedActors;
 
 public: 
 	virtual void Tick(float DeltaTime) override;
