@@ -61,6 +61,8 @@ APlayerCharacter::APlayerCharacter()
 	// Activate ticking in order to update the cursor every frame.
 	PrimaryActorTick.bCanEverTick = true;
 	PrimaryActorTick.bStartWithTickEnabled = true;
+
+	mHealth = mMaxHealth;
 }
 
 // Called when the game starts or when spawned
@@ -148,6 +150,16 @@ void APlayerCharacter::stopConeSpell()
 	bCone = false;
 }
 
+float APlayerCharacter::mGetHealth()
+{
+	return mHealth;
+}
+
+void APlayerCharacter::mSetHealth(float health)
+{
+	mMaxHealth += health;
+}
+
 // Called every frame
 void APlayerCharacter::Tick(float DeltaTime)
 {
@@ -231,7 +243,7 @@ void APlayerCharacter::StopJump()
 	isJumping = !isJumping;
 }
 
-void APlayerCharacter::OnDeath()
+void APlayerCharacter::mOnDeath()
 {
 }
 

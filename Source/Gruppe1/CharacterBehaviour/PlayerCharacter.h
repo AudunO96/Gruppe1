@@ -83,7 +83,13 @@ public:
 		void stopConeSpell();
 
 	UFUNCTION(BlueprintCallable, Category = "Death")
-		void OnDeath();
+	void mOnDeath();
+
+	UFUNCTION(BlueprintCallable, Category = "Player Stats")
+	float mGetHealth();
+
+	UFUNCTION(BlueprintCallable, Category = "Player Stats")
+	void mSetHealth(float health);
 	/*
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Upgrades")
 	TArray<bool> Upgrades;
@@ -110,4 +116,9 @@ private:
 	bool bCone = false;
 
 	FVector projectileTrajectory;
+
+	UPROPERTY(EditAnywhere, Category = "Player Stats")
+	float mMaxHealth;
+
+	float mHealth;
 };

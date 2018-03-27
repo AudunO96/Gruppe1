@@ -23,6 +23,9 @@ public:
 	UFUNCTION(BlueprintImplementableEvent, Category = "HUD")
 		void updateHealthbar();
 
+	UFUNCTION(BlueprintImplementableEvent, Category = "Healing")
+		void onRemoveCorruption();
+
 	/*UFUNCTION(BlueprintImplementableEvent, Category = "Healing")
 	void removeCorruptionBP();
 	*/
