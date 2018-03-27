@@ -72,6 +72,8 @@ void AEnemyBase::BeginPlay()
 void AEnemyBase::removeCorruption()
 {
 	isCorrupt = false;
+
+	onRemoveCorruption();
 }
 
 // Called every frame
