@@ -21,12 +21,12 @@ void ACorruptionDoor::BeginPlay()
 void ACorruptionDoor::ReadAndDelete(float corruptionPoints)
 {
 	// Increments corruptionPoints with corruptionPointsTotal
-	corruptionPointsTotal += corruptionPoints;
+	mCorruptionPointsTotal += mCorruptionPoints;
 
 	//Checks to see if the specific amount of points needed has been met and destroys the door if it is true
 	if (corruptionPointsNeeded != 0)
 	{
-		if (corruptionPointsTotal / corruptionPointsNeeded >= percentNeeded)
+		if (mCorruptionPointsTotal / mCorruptionPointsNeeded >= mPercentNeeded)
 		{
 			UE_LOG(LogTemp, Warning, TEXT("DELET THIS"))
 
@@ -43,7 +43,7 @@ This is updated for how many enemies are pointed at the door, and is then conver
 */
 void ACorruptionDoor::ChangeCorruptionNeeded(float corruptionNeeded)
 {
-	corruptionPointsNeeded += corruptionNeeded;
+	mCorruptionPointsNeeded += corruptionNeeded;
 }
 
 // Called every frame

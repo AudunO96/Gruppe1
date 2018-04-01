@@ -17,9 +17,9 @@ AEnemyBase::AEnemyBase()
 
 float AEnemyBase::recieveHealing(float incomingHealing)
 {
-	incomingHealing = std::min(incomingHealing, health);
+	incomingHealing = std::min(incomingHealing, mHealth);
 
-	health -= incomingHealing;
+	mHealth -= incomingHealing;
 
 	this->updateHealthbar();
 
@@ -28,29 +28,29 @@ float AEnemyBase::recieveHealing(float incomingHealing)
 	else
 		UE_LOG(LogTemp, Error, TEXT("Missing door pointer for: %s"), *this->GetName())
 
-		health = FMath::Clamp(health, 0.0f, maxHealth);
+		mHealth = FMath::Clamp(mHealth, 0.0f, mMaxHealth);
 
-	if (health == 0.0f)
+	if (mHealth == 0.0f)
 		removeCorruption();
 
 	UE_LOG(LogTemp, Error, TEXT("TRUE OR FALSE: %s"), (bGenerateOverlapEventsDuringLevelStreaming ? TEXT("True") : TEXT("False")))
 
-		return health;
+		return mHealth;
 }
 
 float AEnemyBase::getHealth()
 {
-	return health;
+	return mHealth;
 }
 
 float AEnemyBase::getMaxHealth()
 {
-	return maxHealth;
+	return mMaxHealth;
 }
 
 void AEnemyBase::setHealth()
 {
-	health = maxHealth;
+	mHealth = mMaxHealth;
 }
 
 // Called when the game starts or when spawned
@@ -59,7 +59,7 @@ void AEnemyBase::BeginPlay()
 	Super::BeginPlay();
 
 	if (Doorptr)
-		Doorptr->ChangeCorruptionNeeded(maxHealth);
+		Doorptr->ChangeCorruptionNeeded(mMaxHealth);
 }
 
 //void AEnemy_base::RemoveCorruption()
@@ -71,7 +71,7 @@ void AEnemyBase::BeginPlay()
 
 void AEnemyBase::removeCorruption()
 {
-	isCorrupt = false;
+	mIsCorrupt = false;
 
 	onRemoveCorruption();
 }
