@@ -40,8 +40,6 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Healing Properties")
 	float healStrength;
 
-	
-
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;	

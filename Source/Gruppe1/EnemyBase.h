@@ -21,44 +21,42 @@ public:
 	float recieveHealing(float incomingHealing);
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "HUD")
-		void updateHealthbar();
+	void updateHealthbar();
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "Healing")
-		void onRemoveCorruption();
+	void onRemoveCorruption();
 
-	/*UFUNCTION(BlueprintImplementableEvent, Category = "Healing")
-	void removeCorruptionBP();
-	*/
-	UFUNCTION(BlueprintCallable)
-		float getHealth();
+	UFUNCTION(BlueprintCallable, Category ="Health")
+	float getHealth();
 
-	UFUNCTION(BlueprintCallable)
-		float getMaxHealth();
+	UFUNCTION(BlueprintCallable, Category = "Health")
+	float getMaxHealth();
 
-	UFUNCTION(BlueprintCallable)
-		void setHealth();
+	UFUNCTION(BlueprintCallable, Category = "Health")
+	void setHealth();
 
-	FORCEINLINE bool getIsCorrupt() { return isCorrupt; };
+	FORCEINLINE bool getIsCorrupt() { return mIsCorrupt; };
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
-	UPROPERTY(editAnywhere)
-		float maxHealth;
-
-	UPROPERTY(VisibleAnywhere)
-		float health;
-
+	
 	//Gets called when corruption is 0
 	UFUNCTION(BlueprintCallable, Category = "Healing")
-		void removeCorruption();
+	void removeCorruption();
+
+	UPROPERTY(editAnywhere)
+	float mMaxHealth;
+
+	UPROPERTY(VisibleAnywhere)
+	float mHealth;
+
+	UPROPERTY()
+	bool mIsCorrupt = true;
 
 	UPROPERTY(EditAnywhere, Category = "Door")
 	ACorruptionDoor* Doorptr = nullptr;
 
-	UPROPERTY()
-		bool isCorrupt = true;
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
