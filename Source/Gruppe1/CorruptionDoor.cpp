@@ -21,10 +21,10 @@ void ACorruptionDoor::BeginPlay()
 void ACorruptionDoor::ReadAndDelete(float corruptionPoints)
 {
 	// Increments corruptionPoints with corruptionPointsTotal
-	mCorruptionPointsTotal += mCorruptionPoints;
+	mCorruptionPointsTotal += corruptionPoints;
 
 	//Checks to see if the specific amount of points needed has been met and destroys the door if it is true
-	if (corruptionPointsNeeded != 0)
+	if (mCorruptionPointsNeeded != 0)
 	{
 		if (mCorruptionPointsTotal / mCorruptionPointsNeeded >= mPercentNeeded)
 		{

@@ -5,7 +5,6 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Healing_projectile.h"
-#include "Healing_DOT.h"
 #include "PlayerCharacter.generated.h"
 
 
@@ -25,20 +24,20 @@ protected:
 	UFUNCTION(BlueprintCallable, Category = "Spawn")
 	void fireProjectile();
 
-	UFUNCTION(BlueprintCallable, Category = "Spawn")
-	void coneSpell();
+	/*UFUNCTION(BlueprintCallable, Category = "Spawn")
+	void coneSpell();*/
 
 	UPROPERTY(EditAnywhere, Category = "Spawn")
 	TSubclassOf<class AHealing_projectile> ToSpawnProjectile;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Spawn")
-	TSubclassOf<class AHealing_DOT> ToSpawnCone;
+	/*UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Spawn")
+	TSubclassOf<class AHealing_DOT> ToSpawnCone;*/
 
 	UPROPERTY(EditAnywhere, Category = "Spawn")
 		float offsetProjectile;
 
-	UPROPERTY(EditAnywhere, Category = "Spawn")
-		float offsetCone;
+	/*UPROPERTY(EditAnywhere, Category = "Spawn")
+		float offsetCone;*/
 
 public:	
 	// Called every frame
@@ -79,17 +78,17 @@ public:
 	UFUNCTION()
 		void StopJump();
 
-	UFUNCTION()
-		void stopConeSpell();
+	/*UFUNCTION()
+		void stopConeSpell();*/
 
 	UFUNCTION(BlueprintCallable, Category = "Death")
-	void mOnDeath();
+	void OnDeath();
 
 	UFUNCTION(BlueprintCallable, Category = "Player Stats")
-	float mGetHealth();
+	float GetHealth();
 
 	UFUNCTION(BlueprintCallable, Category = "Player Stats")
-	void mSetHealth(float health);
+	void SetHealth(float health);
 	/*
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Upgrades")
 	TArray<bool> Upgrades;
