@@ -78,6 +78,7 @@ void APlayerCharacter::fireProjectile()
 	if (ToSpawnProjectile)
 	{
 		UWorld* world = this->GetWorld();
+
 		//checks if the world exists
 		if (world)
 		{
@@ -93,9 +94,9 @@ void APlayerCharacter::fireProjectile()
 
 			// Spawns actor at the specified parameters given
 			world->SpawnActor<AHealing_projectile>(
-				ToSpawnProjectile,
-				spawnLocation,
-				rotator,
+				ToSpawnProjectile, 
+				spawnLocation, 
+				rotator, 
 				spawnParams
 				);
 		}
@@ -139,6 +140,8 @@ void APlayerCharacter::Tick(float DeltaTime)
 			CursorToWorld->SetWorldRotation(CursorR);
 		}
 	}
+<<<<<<< HEAD
+
 	//Timer for spawning projectile
 	TimerCount++;
 	if (TimerCount * DeltaTime >= .4f) //change this value to edit the timer for when the character can attack
@@ -149,6 +152,11 @@ void APlayerCharacter::Tick(float DeltaTime)
 			fireProjectile();
 		}
 	}
+
+	if (mMana != mMaxMana)
+		SetMana(ManaRegen * DeltaTime);
+=======
+>>>>>>> parent of 07fa906... Added mana and made health and mana update on HUD
 }
 
 // Called to bind functionality to input
@@ -218,5 +226,3 @@ void APlayerCharacter::stopShoot()
 {
 	bShooting = false;
 }
-
-

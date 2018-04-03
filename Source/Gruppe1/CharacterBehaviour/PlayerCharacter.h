@@ -81,6 +81,9 @@ public:
 	/*UFUNCTION()
 		void stopConeSpell();*/
 
+	UPROPERTY(EditAnywhere)
+	float TimerCount;
+
 	UFUNCTION(BlueprintCallable, Category = "Death")
 	void OnDeath();
 
@@ -93,9 +96,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Upgrades")
 	TArray<bool> Upgrades;
 	*/
-
-	UPROPERTY(EditAnywhere)
-		float TimerCount;
 
 	/** Sphere collision component */
 	UPROPERTY(VisibleDefaultsOnly, Category = Character)
@@ -115,15 +115,29 @@ private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 		class UDecalComponent* CursorToWorld;
 
-	void startShoot();
-	void stopShoot();
-
 	bool bCone = false;
 
 	UPROPERTY(EditAnywhere, Category = "Player Stats")
 	float mMaxHealth;
 
 	float mHealth;
+<<<<<<< HEAD
+
+	UPROPERTY(EditAnywhere, Category = "Player Stats")
+	float mMaxMana;
+
+	float mMana;
+
+	UPROPERTY(EditAnywhere, Category = "Player Stats")
+	float ProjectileMana;
+
+	UPROPERTY(EditAnywhere, Category = "Player Stats")
+	float ManaRegen;
+
+	void startShoot();
+	void stopShoot();
 
 	bool bShooting;
+=======
+>>>>>>> parent of 07fa906... Added mana and made health and mana update on HUD
 };
