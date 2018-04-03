@@ -114,8 +114,6 @@ private:
 
 	bool bCone = false;
 
-	FVector projectileTrajectory;
-
 	UPROPERTY(EditAnywhere, Category = "Player Stats")
 	float mMaxHealth;
 
