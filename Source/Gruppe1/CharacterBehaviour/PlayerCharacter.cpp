@@ -155,8 +155,6 @@ void APlayerCharacter::Tick(float DeltaTime)
 
 	if (mMana != mMaxMana)
 		SetMana(ManaRegen * DeltaTime);
-=======
->>>>>>> parent of 07fa906... Added mana and made health and mana update on HUD
 }
 
 // Called to bind functionality to input
