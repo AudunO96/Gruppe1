@@ -107,48 +107,6 @@ void APlayerCharacter::fireProjectile()
 	}
 }
 
-//void APlayerCharacter::coneSpell()
-//{
-//	// Checks if the projectile exists
-//	bCone = true;
-//	if (ToSpawnCone)
-//	{
-//		UWorld* World = this->GetWorld();
-//
-//		if (bCone)
-//		{
-//			//checks if the world exists
-//			if (World)
-//			{
-//				// Sets spawn parameters and makes the player character its owner
-//				FActorSpawnParameters spawnParams;
-//				spawnParams.Owner = this;
-//
-//				// Gets and sets rotation of projectile to be the same as character
-//				FRotator rotator = this->GetActorRotation();
-//				FVector spawnLocation = this->GetActorLocation() + (this->GetActorForwardVector() * offsetCone);
-//
-//				// Spawns actor at the specified parameters given
-//				World->SpawnActor<AHealing_DOT>(ToSpawnCone, 
-//					spawnLocation, 
-//					rotator, 
-//					spawnParams
-//					);
-//			}
-//		}
-//	}
-//	else
-//	{
-//		UE_LOG(LogTemp, Warning, TEXT("Cone is missing"));
-//	}
-//}
-
-// Adding functionality for the animations of the character
-//void APlayerCharacter::stopConeSpell()
-//{
-//	bCone = false;
-//}
-
 float APlayerCharacter::GetHealth()
 {
 	return mHealth;
@@ -156,7 +114,7 @@ float APlayerCharacter::GetHealth()
 
 void APlayerCharacter::SetHealth(float health)
 {
-	mMaxHealth += health;
+	mHealth += health;
 }
 
 // Called every frame
@@ -176,7 +134,6 @@ void APlayerCharacter::Tick(float DeltaTime)
 			FHitResult TraceHitResult;
 			PC->GetHitResultUnderCursor(ECC_Visibility, true, TraceHitResult);
 			FVector CursorFV = TraceHitResult.ImpactNormal;
-			projectileTrajectory = CursorFV;
 			FRotator CursorR = CursorFV.Rotation();
 			// Sets the decal on hit surface
 			CursorToWorld->SetWorldLocation(TraceHitResult.Location);
