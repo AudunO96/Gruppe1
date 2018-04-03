@@ -121,7 +121,6 @@ private:
 	float mMaxHealth;
 
 	float mHealth;
-<<<<<<< HEAD
 
 	UPROPERTY(EditAnywhere, Category = "Player Stats")
 	float mMaxMana;
@@ -138,6 +137,4 @@ private:
 	void stopShoot();
 
 	bool bShooting;
-=======
->>>>>>> parent of 07fa906... Added mana and made health and mana update on HUD
 };
