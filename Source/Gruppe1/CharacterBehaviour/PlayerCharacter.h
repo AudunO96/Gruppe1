@@ -78,6 +78,9 @@ public:
 	UFUNCTION()
 	void StopJump();
 
+	UPROPERTY(EditAnywhere)
+	float TimerCount;
+
 	UFUNCTION(BlueprintCallable, Category = "Death")
 	void OnDeath();
 
@@ -146,4 +149,9 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = "Player Stats")
 	float ManaRegen;
+
+	void startShoot();
+	void stopShoot();
+
+	bool bShooting;
 };

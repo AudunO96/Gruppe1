@@ -187,6 +187,17 @@ void APlayerCharacter::Tick(float DeltaTime)
 		}
 	}
 
+	//Timer for spawning projectile
+	TimerCount++;
+	if (TimerCount * DeltaTime >= .4f) //change this value to edit the timer for when the character can attack
+	{
+		TimerCount = 0.f;
+		if (bShooting)
+		{
+			fireProjectile();
+		}
+	}
+
 	if (mMana != mMaxMana)
 		SetMana(ManaRegen * DeltaTime);
 }
@@ -204,11 +215,8 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 
 	InputComponent->BindAction("Interact", IE_Pressed, this, &APlayerCharacter::Interact);
 
-	InputComponent->BindAction("AttackLine", IE_Pressed, this, &APlayerCharacter::fireProjectile);
-
-	//InputComponent->BindAction("AttackCone", IE_Pressed, this, &APlayerCharacter::coneSpell);
-	//InputComponent->BindAction("AttackLine", IE_Released, this, &APlayerCharacter::stopConeSpell);
-
+	InputComponent->BindAction("AttackLine", IE_Pressed, this, &APlayerCharacter::startShoot);
+	InputComponent->BindAction("AttackLine", IE_Released, this, &APlayerCharacter::stopShoot);
 }
 
 void APlayerCharacter::MoveX(float Value)
@@ -252,3 +260,12 @@ void APlayerCharacter::OnDeath()
 {
 }
 
+void APlayerCharacter::startShoot()
+{
+	bShooting = true;
+}
+
+void APlayerCharacter::stopShoot()
+{
+	bShooting = false;
+}
