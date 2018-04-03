@@ -78,7 +78,6 @@ void APlayerCharacter::fireProjectile()
 	if (ToSpawnProjectile)
 	{
 		UWorld* world = this->GetWorld();
-
 		//checks if the world exists
 		if (world)
 		{
@@ -94,9 +93,9 @@ void APlayerCharacter::fireProjectile()
 
 			// Spawns actor at the specified parameters given
 			world->SpawnActor<AHealing_projectile>(
-				ToSpawnProjectile, 
-				spawnLocation, 
-				rotator, 
+				ToSpawnProjectile,
+				spawnLocation,
+				rotator,
 				spawnParams
 				);
 		}
@@ -140,6 +139,16 @@ void APlayerCharacter::Tick(float DeltaTime)
 			CursorToWorld->SetWorldRotation(CursorR);
 		}
 	}
+	//Timer for spawning projectile
+	TimerCount++;
+	if (TimerCount * DeltaTime >= .4f) //change this value to edit the timer for when the character can attack
+	{
+		TimerCount = 0.f;
+		if (bShooting)
+		{
+			fireProjectile();
+		}
+	}
 }
 
 // Called to bind functionality to input
@@ -155,11 +164,8 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 
 	InputComponent->BindAction("Interact", IE_Pressed, this, &APlayerCharacter::Interact);
 
-	InputComponent->BindAction("AttackLine", IE_Pressed, this, &APlayerCharacter::fireProjectile);
-
-	//InputComponent->BindAction("AttackCone", IE_Pressed, this, &APlayerCharacter::coneSpell);
-	//InputComponent->BindAction("AttackLine", IE_Released, this, &APlayerCharacter::stopConeSpell);
-
+	InputComponent->BindAction("AttackLine", IE_Pressed, this, &APlayerCharacter::startShoot);
+	InputComponent->BindAction("AttackLine", IE_Released, this, &APlayerCharacter::stopShoot);
 }
 
 void APlayerCharacter::MoveX(float Value)
@@ -202,4 +208,15 @@ void APlayerCharacter::StopJump()
 void APlayerCharacter::OnDeath()
 {
 }
+
+void APlayerCharacter::startShoot()
+{
+	bShooting = true;
+}
+
+void APlayerCharacter::stopShoot()
+{
+	bShooting = false;
+}
+
 

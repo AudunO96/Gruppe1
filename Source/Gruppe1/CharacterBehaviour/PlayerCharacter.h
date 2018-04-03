@@ -94,6 +94,9 @@ public:
 	TArray<bool> Upgrades;
 	*/
 
+	UPROPERTY(EditAnywhere)
+		float TimerCount;
+
 	/** Sphere collision component */
 	UPROPERTY(VisibleDefaultsOnly, Category = Character)
 		class UCapsuleComponent* CollisionComp;
@@ -112,10 +115,15 @@ private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 		class UDecalComponent* CursorToWorld;
 
+	void startShoot();
+	void stopShoot();
+
 	bool bCone = false;
 
 	UPROPERTY(EditAnywhere, Category = "Player Stats")
 	float mMaxHealth;
 
 	float mHealth;
+
+	bool bShooting;
 };
