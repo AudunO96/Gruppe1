@@ -269,6 +269,3 @@ void APlayerCharacter::stopShoot()
 {
 	bShooting = false;
 }
-
-
-
