@@ -22,13 +22,13 @@ protected:
 	virtual void BeginPlay() override;
 
 	UFUNCTION(BlueprintCallable, Category = "Spawn")
-	void fireProjectile();
+		void fireProjectile();
 
 	/*UFUNCTION(BlueprintCallable, Category = "Spawn")
 	void coneSpell();*/
 
 	UPROPERTY(EditAnywhere, Category = "Spawn")
-	TSubclassOf<class AHealing_projectile> ToSpawnProjectile;
+		TSubclassOf<class AHealing_projectile> ToSpawnProjectile;
 
 	/*UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Spawn")
 	TSubclassOf<class AHealing_DOT> ToSpawnCone;*/
@@ -37,9 +37,9 @@ protected:
 		float offsetProjectile;
 
 	/*UPROPERTY(EditAnywhere, Category = "Spawn")
-		float offsetCone;*/
+	float offsetCone;*/
 
-public:	
+public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
@@ -55,7 +55,7 @@ public:
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Jumping")
-	bool isJumping;
+		bool isJumping;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Upgrades")
 		bool canJumpHigh;
@@ -78,20 +78,35 @@ public:
 	UFUNCTION()
 		void StopJump();
 
-	/*UFUNCTION()
-		void stopConeSpell();*/
-
 	UPROPERTY(EditAnywhere)
-	float TimerCount;
+		float TimerCount;
 
 	UFUNCTION(BlueprintCallable, Category = "Death")
-	void OnDeath();
+		void OnDeath();
 
 	UFUNCTION(BlueprintCallable, Category = "Player Stats")
-	float GetHealth();
+		float GetHealth();
 
 	UFUNCTION(BlueprintCallable, Category = "Player Stats")
-	void SetHealth(float health);
+		float GetMaxHealth();
+
+	UFUNCTION(BlueprintCallable, Category = "Player Stats")
+		void SetHealth(float health);
+
+	UPROPERTY(BlueprintReadOnly, Category = "Health")
+		float HealthPercent = 1.0f;
+
+	UFUNCTION(BlueprintCallable, Category = "Player Stats")
+		float GetMana();
+
+	UFUNCTION(BlueprintCallable, Category = "Player Stats")
+		float GetMaxMana();
+
+	UFUNCTION(BlueprintCallable, Category = "Player Stats")
+		void SetMana(float mana);
+
+	UPROPERTY(BlueprintReadOnly, Category = "Health")
+		float ManaPercent = 1.0f;
 	/*
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Upgrades")
 	TArray<bool> Upgrades;
@@ -101,8 +116,10 @@ public:
 	UPROPERTY(VisibleDefaultsOnly, Category = Character)
 		class UCapsuleComponent* CollisionComp;
 
-private: 
-	
+private:
+
+	bool UseMana(float manaReq);
+
 	/** Top down camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 		class UCameraComponent* TopDownCameraComponent;
@@ -118,20 +135,20 @@ private:
 	bool bCone = false;
 
 	UPROPERTY(EditAnywhere, Category = "Player Stats")
-	float mMaxHealth;
+		float mMaxHealth;
 
 	float mHealth;
 
 	UPROPERTY(EditAnywhere, Category = "Player Stats")
-	float mMaxMana;
+		float mMaxMana;
 
 	float mMana;
 
 	UPROPERTY(EditAnywhere, Category = "Player Stats")
-	float ProjectileMana;
+		float ProjectileMana;
 
 	UPROPERTY(EditAnywhere, Category = "Player Stats")
-	float ManaRegen;
+		float ManaRegen;
 
 	void startShoot();
 	void stopShoot();

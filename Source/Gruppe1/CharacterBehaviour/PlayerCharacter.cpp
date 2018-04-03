@@ -13,13 +13,14 @@
 #include "Camera/CameraComponent.h"
 #include "MyPlayerController.h"
 #include "Math/Vector.h"
+#include "Math/UnrealMathUtility.h"
 #include "Engine.h"
 
 
 // Sets default values
 APlayerCharacter::APlayerCharacter()
 {
- 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 	// Set as root component
@@ -29,7 +30,7 @@ APlayerCharacter::APlayerCharacter()
 	bUseControllerRotationPitch = false;
 	bUseControllerRotationYaw = false;
 	bUseControllerRotationRoll = false;
-	
+
 	// Configure character movement
 	GetCharacterMovement()->bOrientRotationToMovement = true; // Rotate character to moving direction
 	GetCharacterMovement()->RotationRate = FRotator(0.f, 640.f, 0.f);
@@ -47,7 +48,7 @@ APlayerCharacter::APlayerCharacter()
 	TopDownCameraComponent->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
 	TopDownCameraComponent->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
 
-	// Create a decal in the world to show the cursor's location
+															 // Create a decal in the world to show the cursor's location
 	CursorToWorld = CreateDefaultSubobject<UDecalComponent>("CursorToWorld");
 	CursorToWorld->SetupAttachment(RootComponent);
 	static ConstructorHelpers::FObjectFinder<UMaterial> DecalMaterialAsset(TEXT("Material'/Game/Blueprints/HUD/Decal.Decal'"));
@@ -61,14 +62,17 @@ APlayerCharacter::APlayerCharacter()
 	PrimaryActorTick.bCanEverTick = true;
 	PrimaryActorTick.bStartWithTickEnabled = true;
 
-	mHealth = mMaxHealth;
+
 }
 
 // Called when the game starts or when spawned
 void APlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+	mHealth = mMaxHealth;
+
+	mMana = mMaxMana;
 }
 
 
@@ -82,23 +86,26 @@ void APlayerCharacter::fireProjectile()
 		//checks if the world exists
 		if (world)
 		{
-			// Sets spawn parameters and makes the player character its owner
-			FActorSpawnParameters spawnParams;
-			spawnParams.Owner = this;
+			if (UseMana(ProjectileMana))
+			{
+				// Sets spawn parameters and makes the player character its owner
+				FActorSpawnParameters spawnParams;
+				spawnParams.Owner = this;
 
-			// Gets and sets rotation of projectile to be the same as character
-			FRotator rotator = this->GetActorRotation();
+				// Gets and sets rotation of projectile to be the same as character
+				FRotator rotator = this->GetActorRotation();
 
-			// Gets and sets location of projectile to be the same as character + a specified offset
-			FVector spawnLocation = this->GetActorLocation() + (this->GetActorForwardVector() * offsetProjectile);
+				// Gets and sets location of projectile to be the same as character + a specified offset
+				FVector spawnLocation = this->GetActorLocation() + (this->GetActorForwardVector() * offsetProjectile);
 
-			// Spawns actor at the specified parameters given
-			world->SpawnActor<AHealing_projectile>(
-				ToSpawnProjectile, 
-				spawnLocation, 
-				rotator, 
-				spawnParams
-				);
+				// Spawns actor at the specified parameters given
+				world->SpawnActor<AHealing_projectile>(
+					ToSpawnProjectile,
+					spawnLocation,
+					rotator,
+					spawnParams
+					);
+			}
 		}
 	}
 	else
@@ -112,9 +119,48 @@ float APlayerCharacter::GetHealth()
 	return mHealth;
 }
 
+float APlayerCharacter::GetMaxHealth()
+{
+	return mMaxHealth;
+}
+
 void APlayerCharacter::SetHealth(float health)
 {
 	mHealth += health;
+
+	mHealth = FMath::Clamp(mHealth, 0.0f, mMaxHealth);
+
+	HealthPercent = mHealth / mMaxHealth;
+}
+
+float APlayerCharacter::GetMana()
+{
+	return mMana;
+}
+
+float APlayerCharacter::GetMaxMana()
+{
+	return mMaxMana;
+}
+
+void APlayerCharacter::SetMana(float mana)
+{
+	mMana += mana;
+
+	mMana = FMath::Clamp(mMana, 0.0f, mMaxMana);
+
+	ManaPercent = mMana / mMaxMana;
+}
+
+bool APlayerCharacter::UseMana(float manaReq)
+{
+	if (mMana < manaReq)
+		return false;
+	else
+	{
+		SetMana(-manaReq);
+		return true;
+	}
 }
 
 // Called every frame
@@ -140,7 +186,6 @@ void APlayerCharacter::Tick(float DeltaTime)
 			CursorToWorld->SetWorldRotation(CursorR);
 		}
 	}
-<<<<<<< HEAD
 
 	//Timer for spawning projectile
 	TimerCount++;
@@ -224,3 +269,6 @@ void APlayerCharacter::stopShoot()
 {
 	bShooting = false;
 }
+
+
+
