@@ -23,7 +23,7 @@ public:
 	UFUNCTION(BlueprintImplementableEvent, Category = "HUD")
 	void updateHealthbar();
 
-	UFUNCTION(BlueprintImplementableEvent, Category = "HUD")
+	UFUNCTION(BlueprintImplementableEvent, Category = "Damage")
 	void DamagePlayer();
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "Healing")

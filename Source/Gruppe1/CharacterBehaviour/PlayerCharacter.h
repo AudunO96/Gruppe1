@@ -58,28 +58,25 @@ public:
 	bool isJumping;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Upgrades")
-		bool canJumpHigh;
+	bool canJumpHigh;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Upgrades")
-		bool canGlide;
+	bool canGlide;
 
 	UFUNCTION()
-		void MoveX(float Value);
+	void MoveX(float Value);
 
 	UFUNCTION()
-		void MoveY(float Value);
+	void MoveY(float Value);
 
 	UFUNCTION()
-		void Interact();
+	void Interact();
 
 	UFUNCTION()
-		void StartJump();
+	void StartJump();
 
 	UFUNCTION()
-		void StopJump();
-
-	/*UFUNCTION()
-		void stopConeSpell();*/
+	void StopJump();
 
 	UFUNCTION(BlueprintCallable, Category = "Death")
 	void OnDeath();
@@ -88,7 +85,25 @@ public:
 	float GetHealth();
 
 	UFUNCTION(BlueprintCallable, Category = "Player Stats")
+	float GetMaxHealth();
+
+	UFUNCTION(BlueprintCallable, Category = "Player Stats")
 	void SetHealth(float health);
+
+	UPROPERTY(BlueprintReadOnly, Category = "Health")
+	float HealthPercent = 1.0f;
+
+	UFUNCTION(BlueprintCallable, Category = "Player Stats")
+	float GetMana();
+
+	UFUNCTION(BlueprintCallable, Category = "Player Stats")
+	float GetMaxMana();
+
+	UFUNCTION(BlueprintCallable, Category = "Player Stats")
+	void SetMana(float mana);
+
+	UPROPERTY(BlueprintReadOnly, Category = "Health")
+	float ManaPercent = 1.0f;
 	/*
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Upgrades")
 	TArray<bool> Upgrades;
@@ -96,9 +111,11 @@ public:
 
 	/** Sphere collision component */
 	UPROPERTY(VisibleDefaultsOnly, Category = Character)
-		class UCapsuleComponent* CollisionComp;
+	class UCapsuleComponent* CollisionComp;
 
 private: 
+
+	bool UseMana(float manaReq);
 	
 	/** Top down camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
@@ -118,4 +135,15 @@ private:
 	float mMaxHealth;
 
 	float mHealth;
+
+	UPROPERTY(EditAnywhere, Category = "Player Stats")
+	float mMaxMana;
+
+	float mMana;
+
+	UPROPERTY(EditAnywhere, Category = "Player Stats")
+	float ProjectileMana;
+
+	UPROPERTY(EditAnywhere, Category = "Player Stats")
+	float ManaRegen;
 };
