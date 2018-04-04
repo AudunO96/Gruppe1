@@ -131,6 +131,9 @@ void APlayerCharacter::SetHealth(float health)
 	mHealth = FMath::Clamp(mHealth, 0.0f, mMaxHealth);
 
 	HealthPercent = mHealth / mMaxHealth;
+
+	if (mHealth <= 1.0f)
+		OnDeath();
 }
 
 float APlayerCharacter::GetMana()
@@ -254,10 +257,6 @@ void APlayerCharacter::StopJump()
 {
 	bPressedJump = false;
 	isJumping = !isJumping;
-}
-
-void APlayerCharacter::OnDeath()
-{
 }
 
 void APlayerCharacter::startShoot()

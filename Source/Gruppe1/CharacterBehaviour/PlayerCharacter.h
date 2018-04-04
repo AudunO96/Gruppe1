@@ -78,7 +78,7 @@ public:
 	UFUNCTION()
 	void StopJump();
 
-	UFUNCTION(BlueprintCallable, Category = "Death")
+	UFUNCTION(BlueprintImplementableEvent, Category = "Death")
 	void OnDeath();
 
 	UFUNCTION(BlueprintCallable, Category = "Player Stats")
