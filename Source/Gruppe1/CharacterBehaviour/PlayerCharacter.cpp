@@ -132,8 +132,15 @@ void APlayerCharacter::SetHealth(float health)
 
 	HealthPercent = mHealth / mMaxHealth;
 
-	if (mHealth <= 1.0f)
+	if (mHealth == 0.0f)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("DEATH GRANTED!"))
 		OnDeath();
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("DEATH not GRANTED!"))
+	}
 }
 
 float APlayerCharacter::GetMana()
