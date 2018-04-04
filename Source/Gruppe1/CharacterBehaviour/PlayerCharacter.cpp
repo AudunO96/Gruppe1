@@ -61,8 +61,6 @@ APlayerCharacter::APlayerCharacter()
 	// Activate ticking in order to update the cursor every frame.
 	PrimaryActorTick.bCanEverTick = true;
 	PrimaryActorTick.bStartWithTickEnabled = true;
-
-
 }
 
 // Called when the game starts or when spawned
@@ -71,7 +69,6 @@ void APlayerCharacter::BeginPlay()
 	Super::BeginPlay();
 
 	mHealth = mMaxHealth;
-
 	mMana = mMaxMana;
 }
 
@@ -127,6 +124,9 @@ float APlayerCharacter::GetMaxHealth()
 void APlayerCharacter::SetHealth(float health)
 {
 	mHealth += health;
+
+	if (health < 0)
+		DamageTaken = true;
 
 	mHealth = FMath::Clamp(mHealth, 0.0f, mMaxHealth);
 
@@ -187,14 +187,14 @@ void APlayerCharacter::Tick(float DeltaTime)
 		}
 	}
 
-	//Timer for spawning projectile
-	TimerCount++;
-	if (TimerCount * DeltaTime >= .4f) //change this value to edit the timer for when the character can attack
+	if (bShooting)
 	{
-		TimerCount = 0.f;
-		if (bShooting)
+		//Timer for spawning projectile
+		if (GetWorld()->GetTimeSeconds() - mLastShot >= PlayerShotDelay) //change this value to edit the timer for when the character can attack
 		{
 			fireProjectile();
+
+			mLastShot = GetWorld()->GetTimeSeconds();
 		}
 	}
 
