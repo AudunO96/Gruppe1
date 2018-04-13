@@ -107,6 +107,10 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, Category = "Health")
 	bool DamageTaken = false;
+
+	UPROPERTY(BlueprintReadWrite, Category = "Idle")
+	bool Idle;
+
 	/*
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Upgrades")
 	TArray<bool> Upgrades;
@@ -158,4 +162,10 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = "Player Stats")
 	float PlayerShotDelay;
+
+	UPROPERTY(EditAnywhere, Category = "Player Stats")
+	float IdleDelay;
+
+	float IdleStart;
+	
 };

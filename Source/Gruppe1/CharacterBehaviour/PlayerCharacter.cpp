@@ -201,6 +201,17 @@ void APlayerCharacter::Tick(float DeltaTime)
 		}
 	}
 
+	if (this->GetVelocity() == FVector(0.0f, 0.0f, 0.0f))
+	{
+		if (GetWorld()->GetTimeSeconds() - IdleStart > IdleDelay)
+			Idle = true;
+	}
+	else
+	{
+		Idle = false;
+		IdleStart = GetWorld()->GetTimeSeconds();
+	}
+
 	if (mMana != mMaxMana)
 		SetMana(ManaRegen * DeltaTime);
 }
