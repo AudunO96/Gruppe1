@@ -6,7 +6,6 @@
 #include "GameFramework/Actor.h"
 #include "Components/SphereComponent.h"
 #include "CorruptionDoor.h"
-#include "EnemyMeleeAttack.h"
 #include "GameFramework/Character.h"
 #include "CharacterBehaviour/PlayerCharacter.h"
 #include "EnemyBase.generated.h"
@@ -42,7 +41,7 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Damage")
 	void meleeAttack();
-
+	/*
 	// Overlap
 	UFUNCTION()
 	void BeginOverlap(UPrimitiveComponent* OverlappedComponent,
@@ -55,6 +54,7 @@ public:
 	UFUNCTION()
 	void OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, 
 					  UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+					  */
 	FORCEINLINE bool getIsCorrupt() { return mIsCorrupt; };
 
 protected:
@@ -79,9 +79,6 @@ protected:
 
 	UPROPERTY(EditAnywhere, Category = "Damage")
 	float mDamage;
-
-	UPROPERTY(EditAnywhere, Category = "Damage")
-	TSubclassOf<class AEnemyMeleeAttack> ToSpawnMelee;
 
 	UPROPERTY(EditAnywhere, Category = "Damage")
 	float offsetMelee;
