@@ -58,7 +58,7 @@ void AEnemyBase::setHealth()
 {
 	mHealth = mMaxHealth;
 }
-
+/*
 void AEnemyBase::meleeAttack()
 {
 	// Checks if the projectile exists
@@ -94,6 +94,7 @@ void AEnemyBase::meleeAttack()
 	}
 }
 
+
 void AEnemyBase::BeginOverlap(UPrimitiveComponent * OverlappedComponent, AActor * OtherActor, UPrimitiveComponent * OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult)
 {
 	if(Cast<APlayerCharacter>(OtherActor))
@@ -105,6 +106,7 @@ void AEnemyBase::OnOverlapEnd(UPrimitiveComponent * OverlappedComp, AActor * Oth
 	if (Cast<APlayerCharacter>(OtherActor))
 	bCanAttack = false;
 }
+*/
 
 // Called when the game starts or when spawned
 void AEnemyBase::BeginPlay()
@@ -134,6 +136,7 @@ void AEnemyBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	//Checks if the enemy can attack
+	/*
 	if (bCanAttack)
 	{
 		//Checks if it's too early to attack, attacks if it's not
@@ -142,6 +145,7 @@ void AEnemyBase::Tick(float DeltaTime)
 			meleeAttack();
 		}
 	}
+	*/
 
 }
 
