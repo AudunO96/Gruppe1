@@ -110,17 +110,17 @@ void APlayerCharacter::fireProjectile()
 		UE_LOG(LogTemp, Warning, TEXT("Projectile is missing"))
 	}
 }
-//Gets current health of character
+
 float APlayerCharacter::GetHealth()
 {
 	return mHealth;
 }
-//Gets max health of character
+
 float APlayerCharacter::GetMaxHealth()
 {
 	return mMaxHealth;
 }
-//Sets health of character
+
 void APlayerCharacter::SetHealth(float health)
 {
 	mHealth += health;
@@ -135,17 +135,17 @@ void APlayerCharacter::SetHealth(float health)
 	if (mHealth == 0.0f)
 		OnDeath();
 }
-//Gets current mana of character
+
 float APlayerCharacter::GetMana()
 {
 	return mMana;
 }
-//Gets max mana of character
+
 float APlayerCharacter::GetMaxMana()
 {
 	return mMaxMana;
 }
-//Sets mana of character
+
 void APlayerCharacter::SetMana(float mana)
 {
 	mMana += mana;
@@ -154,7 +154,7 @@ void APlayerCharacter::SetMana(float mana)
 
 	ManaPercent = mMana / mMaxMana;
 }
-//Uses mana specified in manaReq (Mana required)
+
 bool APlayerCharacter::UseMana(float manaReq)
 {
 	if (mMana < manaReq)

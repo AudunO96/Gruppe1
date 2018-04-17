@@ -7,7 +7,6 @@
 #include "Components/SphereComponent.h"
 #include "CorruptionDoor.h"
 #include "GameFramework/Character.h"
-#include "CharacterBehaviour/PlayerCharacter.h"
 #include "EnemyBase.generated.h"
 
 UCLASS()
@@ -39,22 +38,6 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Health")
 	void setHealth();
 
-	UFUNCTION(BlueprintCallable, Category = "Damage")
-	void meleeAttack();
-	/*
-	// Overlap
-	UFUNCTION()
-	void BeginOverlap(UPrimitiveComponent* OverlappedComponent,
-			AActor* OtherActor,
-			UPrimitiveComponent* OtherComp,
-			int32 OtherBodyIndex,
-			bool bFromSweep,
-			const FHitResult &SweepResult);
-
-	UFUNCTION()
-	void OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, 
-					  UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
-					  */
 	FORCEINLINE bool getIsCorrupt() { return mIsCorrupt; };
 
 protected:
@@ -76,18 +59,6 @@ protected:
 
 	UPROPERTY(EditAnywhere, Category = "Door")
 	ACorruptionDoor* Doorptr = nullptr;
-
-	UPROPERTY(EditAnywhere, Category = "Damage")
-	float mDamage;
-
-	UPROPERTY(EditAnywhere, Category = "Damage")
-	float offsetMelee;
-
-	UPROPERTY(EditAnywhere, Category = "Damage")
-	float attackDelay;
-
-	bool bCanAttack;
-	float attackStart;
 
 public:
 	// Called every frame
