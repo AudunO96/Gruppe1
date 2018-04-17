@@ -38,7 +38,7 @@ void ACorruptionDoor::ReadAndDelete(float corruptionPoints)
 /* 
 Increments corruptionNeeded with corruptionPointsNeeded
 
-This is updated for how many enemies are pointed at the door, and is then converted to a per cent value 
+This is updated for how many enemies are pointed at the door, and is then converted to a per cent number 
 (range from 0.0-1.0 is set in the door to see how much percent it needs)
 */
 void ACorruptionDoor::ChangeCorruptionNeeded(float corruptionNeeded)
