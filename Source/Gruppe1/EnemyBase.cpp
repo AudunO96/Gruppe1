@@ -17,8 +17,8 @@ AEnemyBase::AEnemyBase()
 	//Collider for melee attack detection range
 	USphereComponent* SphereComponent = CreateDefaultSubobject<USphereComponent>(TEXT("ColliderBox"));
 	SphereComponent->InitSphereRadius(150.0f);
-	SphereComponent->OnComponentBeginOverlap.AddDynamic(this, &AEnemyBase::BeginOverlap);
-	SphereComponent->OnComponentEndOverlap.AddDynamic(this, &AEnemyBase::OnOverlapEnd);
+	//SphereComponent->OnComponentBeginOverlap.AddDynamic(this, &AEnemyBase::BeginOverlap);
+	//phereComponent->OnComponentEndOverlap.AddDynamic(this, &AEnemyBase::OnOverlapEnd);
 }
 
 float AEnemyBase::recieveHealing(float incomingHealing)
