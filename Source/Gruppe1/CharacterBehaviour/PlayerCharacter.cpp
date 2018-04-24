@@ -61,6 +61,9 @@ APlayerCharacter::APlayerCharacter()
 	// Activate ticking in order to update the cursor every frame.
 	PrimaryActorTick.bCanEverTick = true;
 	PrimaryActorTick.bStartWithTickEnabled = true;
+
+	// initializes upgrades
+	Upgrades.Init(false, 5);
 }
 
 // Called when the game starts or when spawned
@@ -190,7 +193,7 @@ void APlayerCharacter::Tick(float DeltaTime)
 		}
 	}
 
-	if (bShooting)
+	if (bShooting && !GetCharacterMovement()->IsFalling())
 	{
 		//Timer for spawning projectile
 		if (GetWorld()->GetTimeSeconds() - mLastShot >= PlayerShotDelay) //change this value to edit the timer for when the character can attack
@@ -233,24 +236,38 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 	InputComponent->BindAction("AttackLine", IE_Released, this, &APlayerCharacter::stopShoot);
 }
 
+void APlayerCharacter::SetUpgradePickup(int UpgradeID)
+{
+	if (UpgradeID < 0 || UpgradeID > 5)
+		UE_LOG(LogTemp, Error, TEXT("UpgradeID outside of range"))
+	else
+		Upgrades[UpgradeID] = true;
+}
+
 void APlayerCharacter::MoveX(float Value)
 {
-	// finner retningen karakteren staar i
-	FRotator Rotation = Controller->GetControlRotation();
+	if (!isDead)
+	{
+		// finner retningen karakteren staar i
+		FRotator Rotation = Controller->GetControlRotation();
 
-	// legger til bevegelse i retningen
-	const FVector Direction = FRotationMatrix(Rotation).GetScaledAxis(EAxis::X);
-	AddMovementInput(Direction, Value);
+		// legger til bevegelse i retningen
+		const FVector Direction = FRotationMatrix(Rotation).GetScaledAxis(EAxis::X);
+		AddMovementInput(Direction, Value);
+	}
 }
 
 void APlayerCharacter::MoveY(float Value)
 {
-	// finner retningen karakteren staar i
-	FRotator Rotation = Controller->GetControlRotation();
+	if (!isDead)
+	{
+		// finner retningen karakteren staar i
+		FRotator Rotation = Controller->GetControlRotation();
 
-	// legger til bevegelse i retningen
-	const FVector Direction = FRotationMatrix(Rotation).GetScaledAxis(EAxis::Y);
-	AddMovementInput(Direction, Value);
+		// legger til bevegelse i retningen
+		const FVector Direction = FRotationMatrix(Rotation).GetScaledAxis(EAxis::Y);
+		AddMovementInput(Direction, Value);
+	}
 }
 
 void APlayerCharacter::Interact()
@@ -260,8 +277,11 @@ void APlayerCharacter::Interact()
 
 void APlayerCharacter::StartJump()
 {
-	bPressedJump = true;
-	isJumping = !isJumping;
+	if (!isDead)
+	{
+		bPressedJump = true;
+		isJumping = !isJumping;
+	}
 }
 
 void APlayerCharacter::StopJump()
