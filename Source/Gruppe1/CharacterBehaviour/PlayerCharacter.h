@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Healing_projectile.h"
+#include "Array.h"
 #include "PlayerCharacter.generated.h"
 
 
@@ -58,10 +59,10 @@ public:
 	bool isJumping;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Upgrades")
-	bool canJumpHigh;
+	TArray<bool> Upgrades;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Upgrades")
-	bool canGlide;
+	UFUNCTION(BlueprintCallable)
+	void SetUpgradePickup(int UpgradeID);
 
 	UFUNCTION()
 	void MoveX(float Value);
@@ -80,6 +81,9 @@ public:
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "Death")
 	void OnDeath();
+
+	UPROPERTY(BlueprintReadWrite, Category = "Death")
+	bool isDead = false;
 
 	UFUNCTION(BlueprintCallable, Category = "Player Stats")
 	float GetHealth();
