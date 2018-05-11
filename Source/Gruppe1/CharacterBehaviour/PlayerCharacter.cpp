@@ -199,6 +199,7 @@ void APlayerCharacter::Tick(float DeltaTime)
 		if (GetWorld()->GetTimeSeconds() - mLastShot >= PlayerShotDelay) //change this value to edit the timer for when the character can attack
 		{
 			fireProjectile();
+			UE_LOG(LogTemp, Warning, TEXT("HMMMMM"));
 
 			mLastShot = GetWorld()->GetTimeSeconds();
 		}
