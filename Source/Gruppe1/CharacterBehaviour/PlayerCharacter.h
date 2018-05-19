@@ -115,6 +115,9 @@ public:
 	UPROPERTY(BlueprintReadWrite, Category = "Idle")
 	bool Idle;
 
+	UPROPERTY(BlueprintReadWrite, Category = "Shooting")
+	bool bShooting;
+
 	/*
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Upgrades")
 	TArray<bool> Upgrades;
@@ -160,8 +163,6 @@ private:
 
 	void startShoot();
 	void stopShoot();
-
-	bool bShooting;
 	float mLastShot;
 
 	UPROPERTY(EditAnywhere, Category = "Player Stats")
