@@ -20,6 +20,11 @@ void ACorruptionDoor::BeginPlay()
 // Handles corruption points and deletion of the door
 void ACorruptionDoor::ReadAndDelete(float corruptionPoints)
 {
+	if (Doorptr)
+	{
+		Doorptr->ReadAndDelete(corruptionPoints);
+	}
+
 	// Increments corruptionPoints with corruptionPointsTotal
 	mCorruptionPointsTotal += corruptionPoints;
 
@@ -43,6 +48,11 @@ This is updated for how many enemies are pointed at the door, and is then conver
 */
 void ACorruptionDoor::ChangeCorruptionNeeded(float corruptionNeeded)
 {
+	if (Doorptr)
+	{
+		Doorptr->ChangeCorruptionNeeded(corruptionNeeded);
+	}
+
 	mCorruptionPointsNeeded += corruptionNeeded;
 }
 
