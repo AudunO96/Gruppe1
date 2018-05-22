@@ -22,7 +22,7 @@ AHealing_projectile::AHealing_projectile()
 	CollisionComp->CanCharacterStepUpOn = ECB_No;
 
 	// Set as root component
-	RootComponent = CollisionComp;
+	this->RootComponent = CollisionComp;
 
 	// set up overlap
 	// CollisionComp->OnComponentBeginOverlap.AddDynamic(this, &AHealing_base::OnOverlapBegin);
