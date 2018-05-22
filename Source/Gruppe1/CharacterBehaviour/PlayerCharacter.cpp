@@ -218,8 +218,6 @@ void APlayerCharacter::Tick(float DeltaTime)
 
 	if (mMana != mMaxMana)
 		SetMana(ManaRegen * DeltaTime);
-
-	UE_LOG(LogTemp, Warning, TEXT("Health: %f , Mana: %f , ManaRegen: %f"), mHealth, mMana, ManaRegen)
 }
 
 // Called to bind functionality to input
@@ -247,15 +245,15 @@ void APlayerCharacter::SetUpgradePickup(int UpgradeID)
 		Upgrades[UpgradeID] = true;
 
 	switch (UpgradeID) {
-	case 3:
+	case 2:
 		mMaxHealth = 150.0f;
 		mHealth = mMaxHealth;
 		break;
-	case 4:
+	case 3:
 		mMaxMana = 150.0f;
 		mMana = mMaxMana;
 		break;
-	case 5:
+	case 4:
 		ManaRegen *= 1.5f;
 	}
 }
