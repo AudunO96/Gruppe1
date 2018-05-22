@@ -20,10 +20,7 @@ AHealing_projectile::AHealing_projectile()
 	// Players can't walk on it
 	CollisionComp->SetWalkableSlopeOverride(FWalkableSlopeOverride(WalkableSlope_Unwalkable, 0.f));
 	CollisionComp->CanCharacterStepUpOn = ECB_No;
-
-	// Set as root component
-	this->RootComponent = CollisionComp;
-
+	
 	// set up overlap
 	// CollisionComp->OnComponentBeginOverlap.AddDynamic(this, &AHealing_base::OnOverlapBegin);
 
