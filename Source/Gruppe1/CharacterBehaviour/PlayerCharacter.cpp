@@ -133,7 +133,7 @@ void APlayerCharacter::SetHealth(float health)
 
 	mHealth = FMath::Clamp(mHealth, 0.0f, mMaxHealth);
 
-	HealthPercent = mHealth / mMaxHealth;
+	HealthPercent = mHealth / 100.0f;
 
 	if (mHealth == 0.0f)
 		OnDeath();
@@ -155,7 +155,7 @@ void APlayerCharacter::SetMana(float mana)
 
 	mMana = FMath::Clamp(mMana, 0.0f, mMaxMana);
 
-	ManaPercent = mMana / mMaxMana;
+	ManaPercent = mMana / 100.0f;
 }
 
 bool APlayerCharacter::UseMana(float manaReq)
@@ -218,6 +218,8 @@ void APlayerCharacter::Tick(float DeltaTime)
 
 	if (mMana != mMaxMana)
 		SetMana(ManaRegen * DeltaTime);
+
+	UE_LOG(LogTemp, Warning, TEXT("Health: %f , Mana: %f , ManaRegen: %f"), mHealth, mMana, ManaRegen)
 }
 
 // Called to bind functionality to input
@@ -243,6 +245,19 @@ void APlayerCharacter::SetUpgradePickup(int UpgradeID)
 		UE_LOG(LogTemp, Error, TEXT("UpgradeID outside of range"))
 	else
 		Upgrades[UpgradeID] = true;
+
+	switch (UpgradeID) {
+	case 3:
+		mMaxHealth = 150.0f;
+		mHealth = mMaxHealth;
+		break;
+	case 4:
+		mMaxMana = 150.0f;
+		mMana = mMaxMana;
+		break;
+	case 5:
+		ManaRegen *= 1.5f;
+	}
 }
 
 void APlayerCharacter::MoveX(float Value)
