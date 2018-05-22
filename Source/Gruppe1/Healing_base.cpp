@@ -13,8 +13,7 @@ AHealing_base::AHealing_base()
 
 	 CollisionComp = CreateDefaultSubobject<USphereComponent>(TEXT("Sphere Component"));
 	 // CollisionComp->InitSphereRadius(CollisionRadius);
-	 // CollisionComp->SetCollisionProfileName(TEXT("Trigger"));
-	 // CollisionComp->SetupAttachment(RootComponent);
+	 // CollisionComp->SetCollisionProfileName(TEXT("Trigger"))
 
 	 //// Players can't walk on it
 	 //CollisionComp->SetWalkableSlopeOverride(FWalkableSlopeOverride(WalkableSlope_Unwalkable, 0.f));
