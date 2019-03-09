@@ -1,0 +1,9 @@
+{
+	"files.exclude": {
+		"C:/Users/audis/Documents/Unreal Projects/Gruppe1/.git": true,
+		"C:/Users/audis/Documents/Unreal Projects/Gruppe1/.vscode": true,
+		"C:/Users/audis/Documents/Unreal Projects/Gruppe1/Content": true,
+		"C:/Users/audis/Documents/Unreal Projects/Gruppe1/Intermediate": true,
+		"C:/Users/audis/Documents/Unreal Projects/Gruppe1/Saved": true
+	}
+}

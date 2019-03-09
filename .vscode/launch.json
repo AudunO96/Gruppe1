@@ -1,0 +1,130 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Gruppe1 (Debug)",
+			"request": "launch",
+			"preLaunchTask": "Gruppe1 Win64 Debug Build",
+			"program": "C:\\Users\\audis\\Documents\\Unreal Projects\\Gruppe1\\Binaries\\Win64\\Gruppe1-Win64-Debug.exe",
+			"args": [
+			],
+			"cwd": "C:\\Program Files\\Epic Games\\UE_4.20",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "C:\\Program Files\\Epic Games\\UE_4.20\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "Gruppe1 (DebugGame)",
+			"request": "launch",
+			"preLaunchTask": "Gruppe1 Win64 DebugGame Build",
+			"program": "C:\\Users\\audis\\Documents\\Unreal Projects\\Gruppe1\\Binaries\\Win64\\Gruppe1-Win64-DebugGame.exe",
+			"args": [
+			],
+			"cwd": "C:\\Program Files\\Epic Games\\UE_4.20",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "C:\\Program Files\\Epic Games\\UE_4.20\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "Gruppe1 (Development)",
+			"request": "launch",
+			"preLaunchTask": "Gruppe1 Win64 Development Build",
+			"program": "C:\\Users\\audis\\Documents\\Unreal Projects\\Gruppe1\\Binaries\\Win64\\Gruppe1.exe",
+			"args": [
+			],
+			"cwd": "C:\\Program Files\\Epic Games\\UE_4.20",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "C:\\Program Files\\Epic Games\\UE_4.20\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "Gruppe1 (Shipping)",
+			"request": "launch",
+			"preLaunchTask": "Gruppe1 Win64 Shipping Build",
+			"program": "C:\\Users\\audis\\Documents\\Unreal Projects\\Gruppe1\\Binaries\\Win64\\Gruppe1-Win64-Shipping.exe",
+			"args": [
+			],
+			"cwd": "C:\\Program Files\\Epic Games\\UE_4.20",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "C:\\Program Files\\Epic Games\\UE_4.20\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "Gruppe1 (Test)",
+			"request": "launch",
+			"preLaunchTask": "Gruppe1 Win64 Test Build",
+			"program": "C:\\Users\\audis\\Documents\\Unreal Projects\\Gruppe1\\Binaries\\Win64\\Gruppe1-Win64-Test.exe",
+			"args": [
+			],
+			"cwd": "C:\\Program Files\\Epic Games\\UE_4.20",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "C:\\Program Files\\Epic Games\\UE_4.20\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "Gruppe1Editor (Debug)",
+			"request": "launch",
+			"preLaunchTask": "Gruppe1Editor Win64 Debug Build",
+			"program": "C:\\Program Files\\Epic Games\\UE_4.20\\Engine\\Binaries\\Win64\\UE4Editor-Win64-Debug.exe",
+			"args": [
+				"C:\\Users\\audis\\Documents\\Unreal Projects\\Gruppe1\\Gruppe1.uproject",
+				"-debug"
+			],
+			"cwd": "C:\\Program Files\\Epic Games\\UE_4.20",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "C:\\Program Files\\Epic Games\\UE_4.20\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "Gruppe1Editor (DebugGame)",
+			"request": "launch",
+			"preLaunchTask": "Gruppe1Editor Win64 DebugGame Build",
+			"program": "C:\\Program Files\\Epic Games\\UE_4.20\\Engine\\Binaries\\Win64\\UE4Editor.exe",
+			"args": [
+				"C:\\Users\\audis\\Documents\\Unreal Projects\\Gruppe1\\Gruppe1.uproject",
+				"-debug"
+			],
+			"cwd": "C:\\Program Files\\Epic Games\\UE_4.20",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "C:\\Program Files\\Epic Games\\UE_4.20\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "Gruppe1Editor (Development)",
+			"request": "launch",
+			"preLaunchTask": "Gruppe1Editor Win64 Development Build",
+			"program": "C:\\Program Files\\Epic Games\\UE_4.20\\Engine\\Binaries\\Win64\\UE4Editor.exe",
+			"args": [
+				"C:\\Users\\audis\\Documents\\Unreal Projects\\Gruppe1\\Gruppe1.uproject"
+			],
+			"cwd": "C:\\Program Files\\Epic Games\\UE_4.20",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "C:\\Program Files\\Epic Games\\UE_4.20\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "Generate Project Files",
+			"type": "clr",
+			"request": "launch",
+			"program": "C:\\Program Files\\Epic Games\\UE_4.20\\Engine\\Binaries\\DotNET\\UnrealBuildTool.exe",
+			"console": "externalTerminal",
+			"args": [
+				"-projectfiles",
+				"-vscode",
+				"-project=\"C:\\Users\\audis\\Documents\\Unreal Projects\\Gruppe1\\Gruppe1.uproject\"",
+				"-game",
+				"-engine"
+			],
+			"internalConsoleOptions": "openOnSessionStart",
+			"cwd": "C:\\Program Files\\Epic Games\\UE_4.20"
+		}
+	]
+}
